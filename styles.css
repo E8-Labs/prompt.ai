@@ -1,0 +1,81 @@
+.blur-effect {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.hidediv {
+    border-color:#d9d9e3;
+    
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+   
+
+}
+
+.hidediv:hover{
+    cursor:pointer;
+    
+}
+
+.focussed:focus{
+    border: 2px solid #28a47a
+}
+select:focus {
+    outline: none;
+}
+no-focus-style:focus{
+    outline: none;
+        border-color: #999;
+}
+
+active{
+   background: blue;
+}
+
+#new_topic_suggestion:hover{
+    cursor:pointer
+}
+.create_new_prompt_btn:hover{
+    border :1px solid #999
+}
+/* .prompt_ai_logo:hover{
+    cursor:pointer
+} */
+.sidebar_top_links{
+    display: flex;
+        margin-left: 49px;
+        margin-top:15px;
+        align-items:center;
+        border-radius:15px;
+        height:55px;
+       
+}
+
+.sidebar_bottom_links{
+    display: flex;
+        margin-left: 49px;
+        margin-top: 15px;
+        align-items: center;
+        border-radius: 15px;
+        height: 55px
+        
+}
+.prompt_active{
+    height: 50px;
+        width: 180px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        border-radius: 15px;
+        background: green;
+}
+
+#next_page:hover{
+    cursor:pointer;
+}
+
+

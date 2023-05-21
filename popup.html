@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="'bootstrap.js"></script>
+</head>
+
+<body>
+    <style>
+        .step_bar_single_completed{
+            width: 15px;
+            float: left;
+            height: 3px;
+            border: 0;
+            background: #28a47a;
+            margin-left: 5px;
+            border-radius: 3px
+        }
+        .step_bar_single_uncompleted{
+            width: 15px;
+            float: left;
+            height: 3px;
+            border: 0;
+            background: #28a47a77;
+            margin-left: 5px;
+            border-radius: 3px
+        }
+    </style>
+    <div style="height: 900px;width: 600px;">
+        <div>
+            <h4>NOAH DEMO</h4>
+
+            <div id="main_div" style="  height: 70vh;
+                                background-color: black;
+                                width: 400px;
+                                position: fixed;
+                                top: 5%;
+                                left: 20%;
+                                margin-top: 34px;
+                                z-index: 100000;
+                                padding: 25px 14px;
+                                border: 2px solid #28a47a;
+                                box-shadow: 0px 2px 30px 3px #28a47a47;
+                                overflow-x: hidden;
+                                border-radius: 20px;
+                                color: white;">
+
+                <div id="create_prompt_screen_1">
+                    <div id="title_heading" style="margin-left: 27%;">
+                        <h5>CREATE PROMPT</h5>
+
+                    </div>
+                    <div id="step_bar" style="margin-left: 34%;">
+                        <div class="line-1 step_bar_single_completed"></div>
+                        <div class="line-2 step_bar_single_completed"></div>
+                        <div class="line-2 step_bar_single_uncompleted"></div>
+                        <div class="line-2 step_bar_single_uncompleted"></div>
+                        <div class="line-2 step_bar_single_uncompleted"></div>
+                        <div class="line-2 step_bar_single_uncompleted" style="FLOAT: none;"></div>
+                    </div>
+                    <div id="pubpvt_tab" style="margin-left: 29%;padding-top: 10px;">
+                        <button style="background: #474646;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Public</button>
+                        <button style="background: black;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Private</button>
+                    </div>
+                    <div id="new_prompt_title_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
+                        <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Title</span>
+                        <input id='new_prompt_title' type='text' style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;" />
+                    </div>
+                    <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
+                        <textarea id='new_prompt_template_div' style="margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;color: white;font-size: 12px;"></textarea>
+                    </div>
+                    <button style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 40%;">Continue</button>
+                        
+                </div>
+            </div>
+
+            <div id="hidden_div" style="display: none;"   > 
+               
+                <div class="tab">
+                
+                    <button class="tablinks">Favorite</button>
+                    <button class="tablinks">NOAH DEMO</button>
+                    <button class="tablinks">PUBLIC</button>
+                    <button class="tablinks">OWN</button>
+                    <button class="tablinks">HIDDEN</button>
+                
+                </div>
+
+                <div>
+                    Add new Prompt
+                </div>
+
+                <div style="margin: 25px;margin-top: 35%;">
+                    <button id="logout-ext" style="position: absolute;bottom: 10px;left: 39%;" type="button"
+                        class="btn btn-primary">Logout</button>
+                </div>
+
+            </div>
+
+            <div class="container d-flex align-items-center">
+            
+                <button  id="google-sign-in" class="btn btn-info" style="position: absolute;
+                  left: 28%;
+                  top: 40%;">
+                    Sign in with <span> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-google"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
+                    </svg> </span> </button>
+                   
+                    
+            </div>
+            
+        </div>
+    </div>
+
+<script src="popup.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+    

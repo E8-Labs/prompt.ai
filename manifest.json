@@ -1,0 +1,79 @@
+{
+  "name": "ChatgptProject",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "key": "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC+PNv/o5mz7FiagfqiQDZ+sAA4zBq/H1znZqRipnt6Z3TOyDczI8MwtLJ00OYpDZft9IbZv8JGN5jfHvymPt5GrO1VEkpUU9JgbvLlgt1wLhZpH/59BLmfzBch7r6zHnp4j/BPAmqIA/BSrUk0LSC36SHtQZvolcfVoq13W0oJ80K5GqC7BhkQ+4wjCkUpkhQhCvPhdtK+CZXsgTtnKqRMjlEEZuDx+k6XiON2xSnh+DUA7ZzdCtcN5kXgN/NTnrUNlUV1JquKpocc6fqf+7gbBRkDjjsNhMDmXoMusvDZySHVPtVU41FuDnUeBS9iHHVbqjqQO1ocWYR5pnYLeLvfAgMBAAECggEAFP/93x3tsS1laITxqGiDO3/tPlfVmgR5yneLrPIozk3OWKdEZKpNeTpxOrD2v1BnVZa5Lh9bcEnh37t5c1acTdv4BPyUZPOt1QRaXtiP3jrQMYGdI6raXNf4M8A5n+c86MMm6WngXaxlopLLcm2K35JmMt0bu1SRbzVahcL3jNpzFCR2DBxaJGZgdVAUkykOGJ1+POaxqGs+lItk2aLkjVWqPqAIBFqSmUMe3n7V5TE/rVc96edNT6d9ArqERgsR4OKjYunhXJpAtc7MYWmSIfcbkpH/VcvnAmGG4Z93ua8qRCrr+7oP8hvwaAx8xfK1kl6Qy/lcuRPJtpEkr8A/1QKBgQD4GLeeeXZ5GFiVqIoo17dVmiMT/1G8HJKnz6omDZ7+EvghnJArDl/vnuOdDIBHk0A5iTRjiQreVont3moSZciCrYNVOrp01U2lEjx6u4S78+58GTw+ejv6UbWGHQgwo8gHDarDJ8nxW7MU82kP//pyyRw2sKkmj3DGOY8bew+q5QKBgQDETEpfmhCiHvD1ZH0tdKtxGKzbHCmiJ1nXxhwpHJ6ysMJPB8qV9RAVjRmMfjOsLwH6ogfFl9PET6bFuznS01sXdz9PsqMffutjO90s8LE/FYK7yIYvL0Hh3vgsUluiEwv80EbV8aYnAXbVqoQsLXqmua/SEO3PCeRhYotpLqircwKBgQCxDWKs8926mcdONpMyho/NxUxXTxRTfMikfazdr0bR51OxGPxB3eZVKT0irPM3ITzqUqJSjlB1T6jrWpi0PHMV3yIkxt6d1kOtFBCZPg2B3JlLcu7tX2pCP+GdrkZT/+4WKoi88T5KwrhQsU0/H9zp4eACn5x3alJ/BEC+ydnqiQKBgQCP6VqRUlMleEexsHVxUNqr9KotjS0cu3rLjWtx3JCgcqRR6mVkoSCknCiB7rgVYPUzeXz3KQNRJhAfYM7YuKlMv9kDpfSfj54kx2u0mdVoaW3KHA38I8pKPPx3Cf4yCYK9WzjDewEUEae8p+F0vfbwqquy90RRiHAN0YBhoZp47wKBgQDML5ZEDzZ9WVJEH8nzItU0D64zpe9iITmc+3X51BNWh4jKWBNC3fSPBNRHjwMO+fTU7JGbi21RtVI5B78r1PYnwL1vQpXRrsUl9mi9PEQSiL2D5xCMI0IOIv4Aoz+1dXBWUGwe27O6Ofiboc8dWnhpv7NmfnsydkRpkd05fulx1A==",
+  "action": {
+    "default_icon": "download.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.chat.openai.com/*"
+      ],
+      "js": [
+        "jquery.js",
+
+        "popper.js",
+        "bootstrap.js",
+        
+        "./Prompt_functions/fetch_categories.js",
+        "./variables_declaration/api_data.js",
+        "./variables_declaration/creating_category.js",
+        "./variables_declaration/filter.js",
+        "./variables_declaration/pagination.js",
+        "./variables_declaration/prompt_info.js",
+        "./variables_declaration/lang_wrapper.js",
+        "./variables_declaration/user_info.js",
+        "./variables_declaration/our_submit_button.js",
+        "./variables_declaration/images.js",
+        "./Popup_screens/popup_screens_raw_data.js",
+        "./Prompt_functions/creating_prompt.js",
+        "./Prompt_functions/fetch_prompts.js",
+        "./Filter_functions/main_filter.js",
+        "./Prompt_functions/render_public_prompts.js",
+        "./Prompt_functions/upvoting_public.js",
+        "./Filter_functions/categories.js",
+        "./Filter_functions/search_bar.js",
+        "./Prompt_functions/upvoting_private.js",
+        "content.js"
+       
+      ],
+      "css": [
+        "bootstrap.css",
+        "styles.css"
+      ]
+    }
+  ],
+  "oauth2": {
+    "client_id": "734028315606-b2np2glln8svj5pj6d8r26aevivm05si.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "storage",
+    "identity",
+    "identity.email"
+    
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "*.png"
+       
+      ],
+      "matches": [
+        "https://*.chat.openai.com/*"
+      ]
+    }
+  ]
+}
