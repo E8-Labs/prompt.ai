@@ -3,5 +3,11 @@ var submit_button = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAA
 
 
 
-var our_submit_button =`<button id='mybutton' type='button' style="position: absolute;
-            right: 10px;bottom:10px" >  <img src="${submit_button}" alt="vCZC4.png" border="0" />  </button>`
+var our_submit_button = `<button id='mybutton' type='button' style="position: absolute;
+                                                                right: 10px;
+                                                                bottom: 10px;
+                                                                width: 77px;
+                                                                height: 34px;
+                                                                background: #00C28C;
+                                                                border-radius: 20px;
+                                                                font-size:15px" >  Enter  </button>`

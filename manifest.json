@@ -21,24 +21,35 @@
 
         "popper.js",
         "bootstrap.js",
-        
+        "./Prompt_functions/render_public_prompts.js",
+              "./screen_initialize_functions/side_menu.js",
+              "./screen_initialize_functions/menu_items.js",
+              "./screen_initialize_functions/initialize_main_screen_on_new_chat.js",
+              "./screen_initialize_functions/initialize_main_screen_for_not_logged_in.js",
+              "./clearInputs.js",
+              "./screen_initialize_functions/extension_enabled.js",
+              "./screen_initialize_functions/extension_disabled.js",
         "./Prompt_functions/fetch_categories.js",
         "./variables_declaration/api_data.js",
         "./variables_declaration/creating_category.js",
+        "./variables_declaration/selectors_info.js",
         "./variables_declaration/filter.js",
         "./variables_declaration/pagination.js",
         "./variables_declaration/prompt_info.js",
         "./variables_declaration/lang_wrapper.js",
         "./variables_declaration/user_info.js",
         "./variables_declaration/our_submit_button.js",
+      
         "./variables_declaration/images.js",
+       
         "./Popup_screens/popup_screens_raw_data.js",
         "./Prompt_functions/creating_prompt.js",
         "./Prompt_functions/fetch_prompts.js",
         "./Filter_functions/main_filter.js",
-        "./Prompt_functions/render_public_prompts.js",
+        
         "./Prompt_functions/upvoting_public.js",
         "./Filter_functions/categories.js",
+     
         "./Filter_functions/search_bar.js",
         "./Prompt_functions/upvoting_private.js",
         "content.js"

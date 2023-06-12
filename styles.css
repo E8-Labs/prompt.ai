@@ -51,13 +51,13 @@ active{
         margin-top:15px;
         align-items:center;
         border-radius:15px;
-        height:55px;
+        height:10%;
        
 }
 
 .sidebar_bottom_links{
     display: flex;
-        margin-left: 49px;
+        margin-left: 1px;
         margin-top: 15px;
         align-items: center;
         border-radius: 15px;
@@ -77,5 +77,59 @@ active{
 #next_page:hover{
     cursor:pointer;
 }
+
+.change_background_color_of_all_children *{
+    background: black !important;
+}
+
+@media screen and ( min-width : 2732px ) {
+    .text_area_to_center{
+       margin-left:60% !important
+    }
+    
+}
+
+@media screen and (max-width:1366px){
+    #upper_side_menu_content{
+        height:48% !important
+    }
+}
+
+
+@media screen and (min-width:2732px) {
+    #upper_side_menu_content {
+            height: 16% !important
+        }
+    
+}
+
+@media screen and (min-width:2732px) {
+    #custom_gpt_mode_div {
+        margin-left:3.5%
+    }
+
+}
+@media screen and (min-width:4098px) {
+    #custom_gpt_mode_div {
+        margin-left: 6%
+    }
+
+}
+
+@media screen and (min-width:2732px) {
+    .custom_nav {
+        height: 80% !important
+    }
+
+}
+
+@media screen and (min-width:4098px) {
+    #new_chat_div {
+        margin-top:121px !important;
+        
+    }
+
+}
+
 
 

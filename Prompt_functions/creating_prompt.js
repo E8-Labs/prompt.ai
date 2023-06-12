@@ -15,7 +15,7 @@ const create_a_prompt=()=>{
                     chrome.runtime.sendMessage({ type: "changing_pID", id: PD }, function (response) {
                         if (response.message) {
                             chrome.runtime.sendMessage({
-                                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, tone, subtopic, checkUser: 'true', file_content,
+                                type: "creating_prompt", template, teaser, price, dataset_name, hint, title, author: author ? author : undefined, url, topic, tone, subtopic, checkUser: 'true', file_content,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
 
@@ -53,7 +53,7 @@ const create_a_prompt=()=>{
         }
         else {
             chrome.runtime.sendMessage({
-                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'true', file_content,
+                type: "creating_prompt", template: template, teaser, dataset_name, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'true', file_content,
                 user: userId, sequential: 'true', teaser
             }, function (response) {
                 console.log(response);
@@ -103,7 +103,7 @@ const create_a_prompt=()=>{
 
                         if (response.message) {
                             chrome.runtime.sendMessage({
-                                type: "creating_prompt", template, price, teaser, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'true', file_content,
+                                type: "creating_prompt", template, dataset_name, price, teaser, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'true', file_content,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
 
@@ -144,7 +144,7 @@ const create_a_prompt=()=>{
 
 
             chrome.runtime.sendMessage({
-                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: true.toString(), file_content,
+                type: "creating_prompt", template, teaser, dataset_name, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: true.toString(), file_content,
                 user: userId, sequential: false.toString(), teaser
             }, function (response) {
                 console.log(response);
@@ -182,7 +182,7 @@ const create_a_prompt=()=>{
 
                         if (response.message) {
                             chrome.runtime.sendMessage({
-                                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content, public,
+                                type: "creating_prompt", template, dataset_name, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content, public,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
 
@@ -231,7 +231,7 @@ const create_a_prompt=()=>{
 
         else if (count === 0) {
             chrome.runtime.sendMessage({
-                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content,
+                type: "creating_prompt", template, teaser, dataset_name, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content,
                 user: userId, sequential: 'true', teaser,
             }, function (response) {
                 console.log(response);
@@ -283,7 +283,7 @@ const create_a_prompt=()=>{
 
                         if (response.message) {
                             chrome.runtime.sendMessage({
-                                type: "creating_prompt", template, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content, public,
+                                type: "creating_prompt", template, dataset_name, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content, public,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
 
@@ -312,7 +312,7 @@ const create_a_prompt=()=>{
         else if (count === 0) {
 
             chrome.runtime.sendMessage({
-                type: "creating_prompt", template, teaser, hint, price, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content,
+                type: "creating_prompt", template, teaser, dataset_name, hint, price, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content,
                 user: userId, sequential: 'false', teaser,
             }, function (response) {
                 console.log(response);

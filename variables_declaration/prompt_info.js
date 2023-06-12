@@ -10,7 +10,7 @@ var public = true;
 var pID;
 var prompt_no = 0;
 var template;
-var user_prompts;
+
 var price;
 var teaser = ''
 var title = ''
@@ -24,7 +24,7 @@ var PD;
 var hint;
 var topic;
 var tone;
-var prompt_selected;
+
 var extra_parent_prompts;
 var childPrompt;
 var maxlength = 10;

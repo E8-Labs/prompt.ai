@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     {
         var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
                 method: 'POST',
-                body:JSON.stringify({"body":{ type: "upvoting", id:request.id }}),
+          body: JSON.stringify({ "body": { type: "upvoting", id: request.id, IncrementBy: request.IncrementBy }}),
                 headers: {
                     "Content-Type": "application/json;"
                 }
@@ -311,6 +311,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             body: JSON.stringify({
               body: {
                 type: "creating_prompt",
+                dataset_name: request.dataset_name,
                 template:request.template,
                 teaser:request.teaser,
                 hint:request.hint,
@@ -539,11 +540,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           })
           .then(function (jsonData) {
             var obj = jsonData
+            console.log('Response with Success. Please check status...')
             console.log(obj)
             sendResponse({ status: 200, data: obj });
           })
           .catch(function (err) {
             console.log('Opps, Something went wrong!', err)
+            sendResponse({ status: 400 });
           });
       }
 
@@ -556,7 +559,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         body: JSON.stringify({
           body: {
             type: "inserting_user_prompt_history", user: request.user,
-            prompt_id:request.prompt_id
+            prompt_id:request.prompt_id,
+            prompt_ai_response: request.prompt_ai_response
           },
         }),
         headers: {
@@ -613,6 +617,158 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         console.log("Opps, Something went wrong!", err);
         sendResponse({ status: 400 });
       });
+  }
+
+  if (request.type == "editing_prompt") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({
+        "body": {
+          type: "editing_prompt",
+          id: request.id,
+          template:request.template, 
+          teaser:request.teaser, 
+          price:request.price, 
+          hint:request.hint, 
+          title:request.title, 
+          url:request.url, 
+          topic:request.topic, 
+          subtopic:request.subtopic, 
+          file_content:request.file_content,
+          dataset_name: request.dataset_name
+        }
+      }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+  if (request.type == "delete_prompt") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "delete_prompt", id: request.id } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "fetching_selectors") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "fetching_selectors", } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "logging_out") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "logging_out", id:request.id } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "logging_in") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "logging_in", email: request.email } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "fetching_template_content") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "fetching_template_content", id: request.id } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
   }
 
 

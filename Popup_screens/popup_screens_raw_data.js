@@ -1,5 +1,6 @@
 //This file contains popup raw data.
 
+
 var popUp = `<div id="openPopUp" style="  height: 500px;
               background-color: black;
               width: 400px;
@@ -21,6 +22,7 @@ var popUp = `<div id="openPopUp" style="  height: 500px;
               font-size: 13px;
               position: absolute;
               top: 31px;
+              cursor:pointer;
               color: #28a47a;"  >
             &#10006;
             </span>
@@ -46,19 +48,19 @@ var popUp = `<div id="openPopUp" style="  height: 500px;
             </div>
             <div id="new_prompt_title_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Title</span>
-            <input id='new_prompt_title'  type='text'    style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" />
+            <input id='new_prompt_title'  type='text' maxlength='150'   style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" />
             </div>
             <div style="display:flex;justify-content:flex-end"> <p id='max_title_char_length' style="color: white;
             font-size: 12px;
             margin-right: 20px;"> ${max_char_title}  characters  </p>    </div>
             <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Teaser</span>
-            <textarea  placeholder='Description: What can users do with this' id='new_prompt_teaser' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;font-size: 12px;box-shadow: none;"></textarea>
+            <textarea  maxlength="250" placeholder='Description: What can users do with this' id='new_prompt_teaser' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;font-size: 12px;box-shadow: none;"></textarea>
             </div>
-            <div style="display:flex;justify-content:flex-end"> <p style="color: white;
+            <div style="display:flex;justify-content:flex-end"> <p id='max_char_teaser_length' style="color: white;
             font-size: 12px;
             margin-right: 20px;"> ${max_char_teaser} characters </p>  </div>
-            <button id='continue_to_prompt_screen_2' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 40%;position:absolute;bottom:20px;">Continue</button>
+            <button id='continue_to_prompt_screen_2' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
 
             </div>
             </div>`
@@ -85,6 +87,7 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
                 font-size: 13px;
                 position: absolute;
                 top: 31px;
+                cursor:pointer;
                 color: #28a47a;"  >
               &#10006;
               </span>
@@ -112,7 +115,7 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
 
               
              <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Title</span>
+             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Template</span>
             <textarea placeholder='Prompt Text, including placeholders [TargetLanguage][Prompt],[Variable1],[Variable2] replaced automagically' id='new_prompt_template' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 175px;border: none;font-size: 12px;box-shadow: none;"></textarea>
            
             
@@ -130,7 +133,7 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
 
               
               
-              <button id='continue_to_prompt_screen_3' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 40%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_3' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
 
               </div>
               </div>
@@ -165,6 +168,7 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
                 font-size: 13px;
                 position: absolute;
                 top: 31px;
+                cursor:pointer;
                 color: #28a47a;"  >
               &#10006;
               </span>
@@ -238,7 +242,7 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
 
              
 
-              <button id='continue_to_prompt_screen_4' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 40%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_6' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
 
               </div>
               </div>
@@ -329,7 +333,7 @@ var popUp4 = `<div id="openPopUp" style="  height: 500px;
               </div>
               </div>
               
-              <button id='continue_to_prompt_screen_5' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 40%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_5' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
               </div>
               </div>`;
 
@@ -354,6 +358,7 @@ var popUp5 = `<div id="openPopUp" style="  height: 500px;
                   font-size: 13px;
                   position: absolute;
                   top: 31px;
+                  cursor:pointer;
                   color: #28a47a;"  >
                 &#10006;
                 </span>
@@ -378,8 +383,9 @@ var popUp5 = `<div id="openPopUp" style="  height: 500px;
                 </div>
 
                 <div id="pubpvt_tab" style="margin-left: 29%;padding-top: 20px;">
-                <button id='public_pay_button' style="background: #474646;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Public</button>
+                <!--<button id='public_pay_button' style="background: #474646;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Public</button>
                 <button id='private_pay_button' style="background: black;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Private</button>
+                -->
                 </div>
 
 
@@ -450,12 +456,13 @@ var popUp6 = `<div id="openPopUp" style="  height: 500px;
                 font-size: 13px;
                 position: absolute;
                 top: 31px;
+                cursor:pointer;
                 color: #28a47a;"  >
               &#10006;
               </span>
               </div>
 
-               <div>  <button id='go_back_to_screen_4' style="color:#28a47a" > Back </button>  </div>
+               <div>  <button id='go_back_to_screen_3' style="color:#28a47a" > Back </button>  </div>
               
 
               <div id="create_prompt_screen_6">
@@ -482,29 +489,47 @@ var popUp6 = `<div id="openPopUp" style="  height: 500px;
               <b style="color:white;font-size:11px;margin-left: -25px;"> (Optional)  </b>
               </div>
 
-              <div id="new_prompt_CSV_div" style="display: grid;margin-top:10px;gap: 35px;">
+              <div id="new_prompt_CSV_div" style="display: flex;
+                                                  margin-top: 10px;
+                                                  align-items: center;
+                                                  ">
               <div id="file_upload_button" style="height: 50px;margin-top:10px;
                 border-radius: 50%;
                 background-color: #28a47a;
-                width: 50px;
+                width: 54px;
                 margin-left: 60px;
                 display: flex;
                 justify-content: center;
                 align-items: center;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                <div  style="width: 100%;
+                              height: 100%;
+                              display: flex;
+                              align-items: center;
+                              justify-content:center" >
+              <svg  style="height:100%;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
               <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
               <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
               </svg>
+              </div>
                  
               
             
               </div>
              
-               <div style="display:flex;justify-content:center;margin-top:-70px">
-              <input style="display:none;" id='file_select_input' type='file' />
-              <span style="color: white;
-                           position: absolute;
-                           left: 138px;" id='file_text_name'>   </span>
+              <div style="display:flex;justify-content:center">
+              <input style="width: 100%;
+                          margin-top: 10px;
+                          margin-left: 20px;;" id='file_select_input' type='file' />
+              <span style="
+              color: white;
+              position: absolute;
+              top: 40%;
+              left: 43%;
+              max-width: 150px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;"
+               id='file_text_name'>   </span>
               </div>
              
             </div>
@@ -574,6 +599,7 @@ var popUp7 = `<div id="openPopUp" style="  height: 500px;
                 font-size: 13px;
                 position: absolute;
                 top: 31px;
+                cursor:pointer;
                 color: #28a47a;"  >
               &#10006;
               </span>
@@ -637,9 +663,11 @@ var popUp7 = `<div id="openPopUp" style="  height: 500px;
               </div>
                 
 
-              <div style="display:flex;gap:10px;
-                          
-                          margin-left:5px">
+              <div style="bottom: 70px;
+                          display:flex;
+                          gap:10px;
+                          margin-left:5px;
+                          position: absolute;">
               <div> <svg style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -807,4 +835,72 @@ var suggestionPopUp = `<div id="openPopUp" style="  position: fixed;
               </div>
               </div>`;
 
+var feature_popup = ` <div id='feature_div' style="width: 401px;
+                          height: 464px;
+                          position: fixed;
+                          left: 36%;
+                          top: 20%;
+                          background: #050A08;
+                          box-shadow: rgba(40, 164, 122, 0.467) 1px 0px 3px 3px
+                          " > 
 
+             <div style="padding:5%" > <h3 style="color:white"> Prompt. </h3>  </div>             
+              
+             <div style="padding: 5%;
+                        padding-top: 28%;" >  
+              <div> <h3 style="color:white;width:257px"> Reduce your workload with ChatGPT x {Name of App} </h3>  </div>
+             </div>
+
+             <div style="padding:5%;display:flex;" > 
+             <img src='${white_circle_feature}' alt='white_circle' />
+             <img style="margin-left:1.5%" src='${dull_circle_feature}' alt='dull_circle' />
+             <img style="margin-left:1.5%" src='${dull_circle_feature}' alt='dull_circle' />
+             </div>
+
+            </div>`
+
+
+var connect_openai_popup_for_not_registered=()=>{
+  `
+  
+`
+}
+
+const connect_openai_popup_for_not_logged_in=()=>{
+  ` <div id='connect_with_openai_div' style="width: 428px;
+                                                      height: 464px;
+                                                      position: fixed;
+                                                      left: 58%;
+                                                      top: 20%;
+                                                      background: black;
+                                                      box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px"> 
+            <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+            padding-right: 4.25%;
+            cursor:pointer"  alt='cross_btn'  />  </div>
+            <div style="margin-top:30px;display:flex;justify-content:center" > <img src='${prompt_ai_logo}'  alt='prompt_ai_logo' /> </div>
+            <div  style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
+            <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
+            
+            <div id='log_in' style="display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 54px;
+              cursor:pointer;
+              width: 208px;
+              background: #00C28C;
+              margin-left: 27%;
+              border-radius: 20px;
+              margin-top: 10%;" > 
+              <div style="display:flex;padding-left:5%" > <img src="${profile_image}"  />  
+              <p style="color:white;margin-left:7px"> Sign in With Open AI   </p>
+              </div>
+            </div>
+
+
+            <div style="margin-top:20%;display:flex;justify-content:center;align-items:center" > <h4 style="color:white"> Don't have an account?  </h4>  
+            <h4 style="color:#00C28C"> Sign up </h4>
+            </div>
+
+
+            </div>`
+}

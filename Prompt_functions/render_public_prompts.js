@@ -15,6 +15,9 @@ const render_public_prompts=()=>{
     if ($('#Pagination_div').length) {
         $('#Pagination_div').remove();
     }
+    if ($('#purchase_div').length) {
+        $('#purchase_div').remove();
+    }
   let public_prompts = global_api_response.filter(
         (item) => item.isPublic === true
     );
@@ -64,8 +67,8 @@ const render_public_prompts=()=>{
       
 
     <div class="d-flex mx-2" style="gap:10px">
-          <div style="display:flex"><button id=${data._id} class='publicupvote' type='button' > <img src="${uparrow}" alt="vCZC4.png" border="0" /> </button>
-              <p>  &nbsp ${data.likes}  </p>
+          <div style="display:flex"><button id=${data._id}  type='button' > <img src="${uparrow}" alt="vCZC4.png" border="0" /> </button>
+              <p>  &nbsp ${Math.ceil(data.likes)}  </p>
           </div>
           
       </div>
@@ -133,8 +136,8 @@ const render_public_prompts=()=>{
       
 
     <div class="d-flex mx-2" style="gap:10px">
-          <div style="display:flex"><button id=${data._id} class='publicupvote' type='button' > <img src="${uparrow}" alt="vCZC4.png" border="0" /> </button>
-              <p>  &nbsp ${data.likes}  </p>
+          <div style="display:flex"><button id=${data._id}  type='button' > <img src="${uparrow}" alt="vCZC4.png" border="0" /> </button>
+              <p>  &nbsp ${Math.ceil(data.likes)}  </p>
           </div>
           
       </div>
@@ -158,16 +161,22 @@ const render_public_prompts=()=>{
   </div>
       </div>`)
 
-
+           
         }
 
+        var target = $('a[href="#"]');
+        var offset = $(target).offset().top;
+        
 
+      
+        // $('.flex-1.overflow-hidden >div >div').eq(1).animate({ scrollTop: offset }, 500);
 
     }
+   
 
 
-    if (extra_parent_prompts.length > 0) {
-        $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%">
+    
+        $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%;padding-bottom:15%">
           
           <div id='Forward_button_div'  >  <h4 style="color:#28a47a"  id='next_page'> Show More </h4>   </div>
           </div>
@@ -175,26 +184,10 @@ const render_public_prompts=()=>{
     `)
 
 
-    }
+    
     
 
-    if (extra_parent_prompts.length === 0) {
-
-    //     $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%">
-
-    //       <div id='Forward_button_div'  >  <h4 style="color:#28a47a"  id='next_page'> Show More </h4>   </div>
-    //       </div>
-
-    // `)
-    //     $('#next_page').prop('disabled', true);
-    //     $('#Pagination_div').css('padding-top', '15%');
-
-
-       $('#Pagination_div').remove();
-
-
-     
-    }
+    
     if (category_selected) {
         if ($('#Pagination_div').length) {
             $('#Pagination_div').remove();
@@ -203,17 +196,20 @@ const render_public_prompts=()=>{
     }
 
     if (($('.relative.flex.flex-col.items-stretch.justify-center.gap-2').eq(0).length || is_premium)){
+        if($('#Pagination_div').length){
+            $('#Pagination_div').remove();
+        }
 
-        if(extra_parent_prompts.length===0){
+        
             $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%">
           
           <div id='Forward_button_div'  >  <h4 style="color:#28a47a"  id='next_page'> Show More </h4>   </div>
           </div>
     
     `)
-    $('#next_page').prop('disabled',true);
+    
 
-        }
+        
         // $('#Pagination_div').css('padding-bottom','100px');
         $('#Pagination_div').css('padding-bottom','15%');
         
