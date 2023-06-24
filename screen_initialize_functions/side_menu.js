@@ -25,11 +25,11 @@ const appending_side_menu = () => {
         if ($('#upper_side_menu_content').length) {
             $('#upper_side_menu_content').remove();
         }
-        $('nav').eq(0).before(`<div id='upper_side_menu_content' style="height:30%;padding-top: 9%;"  >  </div>`)
+        $('nav').eq(0).prepend(`<div id='upper_side_menu_content' style="padding-top: 9%;"  >  </div>`)
 
-        $('#upper_side_menu_content').parent().addClass('change_background_color_of_all_children');
+        $('nav').parent().addClass('change_background_color_of_all_children');
 
-        $('nav').css('height', '70%');
+        $('nav').css('height', '100%');
         $('.flex-col.flex-1.transition-opacity.duration-500.overflow-y-auto').eq(0).css('margin-left', '20%');
 
 

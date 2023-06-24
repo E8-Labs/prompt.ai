@@ -19,7 +19,7 @@ const main_screen_for_user_not_logged_in=()=>{
                                    position: relative;
                                    right: 12%;
                                    top: 13px;">
-                          <div style="padding-top:10px;margin-left: 40px;">  <img id='search_icon' src='${search_icon}' style="cursor:pointer"  />  </div>
+                          
               </div> 
                </div>
           </div>
@@ -35,27 +35,46 @@ const main_screen_for_user_not_logged_in=()=>{
     );
 
     if (is_premium === true) {
-        $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
-
-        // $('#top_bar').prepend(`<div id='custom_gpt_mode_div' style="display: flex;
-                                               
-        //                                        position: absolute;
-        //                                        left: 41%;
-        //                                        width: 296px;
-        //                                        background: black;
-        //                                        height: 54px;border-radius:0.5rem" > <button id='gpt_3' style="color:white;width:50%;background:#00C28C;color:white;border-radius:10px;margin:1%" >  GPT-3.5 </button> 
-        //                                        <button id='gpt_4' style="color:white;width:50%;background:black;color:white;border-radius:8px;margin:1%" >  GPT-4 </button>
-        //                                        </div>`)
+        $('#top_bar').append(`     <div class="switches-container" style=" position: absolute;
+                                                              left: 58%;
+                                                              top: 4%;" >
+                                    <input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked">
+                                    <input type="radio" id="switchYearly" name="switchPlan" value="Yearly">
+                                    <label id='gpt_3_button' for="switchMonthly">GPT-3.5</label>
+                                    <label id='gpt_4_button'  for="switchYearly" class="gtp_4">GPT-4
+                                        <div class="version_info">
+                                            <p>Our most capable model, great for tasks that require creative and advanced reasoning</p>
+                                            <span>Available exclusively to plus users</span>
+                                            <ul>
+                                                <li id='default_mode'  style="" ><a href=${window.location.href == 'https://chat.openai.com/?model=gpt-4' ? '#' : 'https://chat.openai.com/?model=gpt-4' } style="text-decoration:none;cursor:pointer" ><img src="${star_2}" alt=""> Default</a></li>
+                                                <li id='browser_mode' ><a href="https://chat.openai.com/?model=gpt-4-browsing" style="text-decoration:none;cursor:pointer"><img src="${browse}" alt=""> Browse with Bing</a></li>
+                                                <li id='plugins_mode' ><a href="https://chat.openai.com/?model=gpt-4-plugins" style="text-decoration:none;cursor:pointer"><img src="${plugins}" alt=""> Plugins</a></li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                    <div class="switch-wrapper">
+                                      <div class="switch">
+                                        <div>GPT-3.5</div>
+                                        <div>GPT-4</div>
+                                      </div>
+                                    </div>
+                                </div>`)
     }
 
     $(loading_gif_2).show();
 
-    $('#main_screen_div').append(`    <div style="position:absolute;top:1%;right:3%;width:10%"> <button class="btn btn-info" style="    height: 30px;
+    $('#main_screen_div').append(`    <div  style="         top: 4%;
+                                                            right: 1%;
+                                                            
+                                                            display: flex;
+                                                            justify-content: flex-end;
+                                                            align-items:center;
+                                                            position: absolute;"> <img style="padding-right:1.5%" id='search_icon' src='${search_icon}' style="cursor:pointer" />   <button class="btn btn-info" style="    height: 30px;
                                                                                               
                                                                                               background-color: #00c08b;
                                                                                              top: -5px;
-                                                                                              position: absolute;
-                                                                                              left: 50px;top: 20px;" id="connect" type="button" class=""  > Connect with Openai  </button>  </div>`)
+                                                                                            
+                                                                                              left: 50px;top: 20px;" id='connect' type="button" class=""  > Connect with Openai  </button>  </div>`)
 
     $('#top_bar').before(`<a style="color:white;display:none" id='navigating_to_top' href='#'> Navigate to me </a>`)
     $("#menu").after(`<div id='menu-items' style="display:flex;justify-content:space-between;align-items:center;width:100%;margin-left:20px">
@@ -70,7 +89,14 @@ const main_screen_for_user_not_logged_in=()=>{
                                       position: relative;
                                       ">
                                     <div style="display: flex;width: 700px;">
-                                    <div style="display:flex;align-items:center" id='publicbutton' > <div> <img src="${star}" alt="vCZC4.png" border="0" /> </div>  <div >  &nbsp <span style="color:white;margin-left:5px">   All </span> </div> </div>
+                                    <div style="    display: flex;
+                                                    align-items: center;
+                                                    cursor: pointer;
+                                                    background: rgba(255, 200, 5, 0.1);
+                                                    width: 68px;
+                                                    height: 31px;
+                                                    padding-left: 1%;
+                                                    border-radius: 10px;" id='publicbutton' > <div> <img src="${star_2}" alt="vCZC4.png" border="0" /> </div>  <div >  &nbsp <span style="color:white;margin-left:5px">   All </span> </div> </div>
                             
                             
                             
@@ -107,20 +133,35 @@ const main_screen_for_user_not_logged_in=()=>{
                                                     margin-top: 15px;
                                                     margin-left: 35px;" ></div>`;
 
-        // if(!$("h1").parent().length)
-
-        //Removing text that appears if gptmode4 is selected
-        // if ($('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600').eq(0).length) {
-        //   $('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600').eq(0).css('display', 'none');
-        // }
-        // $(main_screen_selector).eq(0).css('background', 'black');
 
         $('#top_bar').after(main_div);
         render_public_prompts();
      
-        if(isRegistered===true){
-            $('#connect').attr('id','log_in');
+
+
+
+    //    if(isRegistered===true){
+       if(userInfo){
+        if(userInfo.username){
+            $('#connect').attr('id','sign_in');
         }
+            
+        
+       }else{
+           $('#connect').attr('id','logging_in_first_time');
+       }
+    //    }
+
+        let check = sessionStorage.getItem('isExtensionActive');
+        if (check) {
+            console.log(typeof (check));
+            if (check === 'false') {
+                isExtensionActive = false;
+                return extension_disabled();
+            }
+        }
+
+       
 
     });
 

@@ -34,18 +34,45 @@ const initialize_main_screen_on_new_chat=()=>{
     );
 
     if (is_premium === true) {
-        // $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
-
-        // $('#top_bar').prepend(`<div id='custom_gpt_mode_div' style="display: flex;
-                                               
-        //                                        position: absolute;
-        //                                        left: 41%;
-        //                                        width: 296px;
-        //                                        background: black;
-        //                                        height: 54px;border-radius:0.5rem" > <button id='gpt_3' style="color:white;width:50%;background:#00C28C;color:white;border-radius:10px;margin:1%" >  GPT-3.5 </button> 
-        //                                        <button id='gpt_4' style="color:white;width:50%;background:black;color:white;border-radius:8px;margin:1%" >  GPT-4 </button>
-        //                                        </div>`)
+        $('#top_bar').append(`     <div class="switches-container" style=" position: absolute;
+                                                              left: 47%;
+                                                              top: 4%;" >
+                                    <input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked">
+                                    <input type="radio" id="switchYearly" name="switchPlan" value="Yearly">
+                                    <label id='gpt_3_button' for="switchMonthly">GPT-3.5</label>
+                                    <label id='gpt_4_button' for="switchYearly" class="gtp_4">GPT-4
+                                        <div class="version_info">
+                                            <p>Our most capable model, great for tasks that require creative and advanced reasoning</p>
+                                            <span>Available exclusively to plus users</span>
+                                            <ul>
+                                                <li id='default_mode'  style="" ><a href="#" style="text-decoration:none;cursor:pointer" ><img src="${star}" alt=""> Default</a></li>
+                                                <li id='browser_mode' ><a href="#" style="text-decoration:none;cursor:pointer"><img src="${browse}" alt=""> Browse with Bing</a></li>
+                                                <li id='plugins_mode' ><a href="#" style="text-decoration:none;cursor:pointer"><img src="${plugins}" alt=""> Plugins</a></li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                    <div class="switch-wrapper">
+                                      <div class="switch">
+                                        <div>GPT-3.5</div>
+                                        <div>GPT-4</div>
+                                      </div>
+                                    </div>
+                                </div>`)
     }
+
+    // if (is_premium === true) {
+    //     $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
+
+    //     $('#top_bar').prepend(`<div id='custom_gpt_mode_div' style="display: flex;
+                                               
+    //                                            position: absolute;
+    //                                            left: 41%;
+    //                                            width: 296px;
+    //                                            background: black;
+    //                                            height: 54px;border-radius:0.5rem" > <button id='gpt_3' style="color:white;width:50%;background:#00C28C;color:white;border-radius:10px;margin:1%" >  GPT-3.5 </button> 
+    //                                            <button id='gpt_4' style="color:white;width:50%;background:black;color:white;border-radius:8px;margin:1%" >  GPT-4 </button>
+    //                                            </div>`)
+    // }
 
 
 

@@ -6,7 +6,12 @@ var prompt_to_edit = [];
 var gpt_mode;
 var response_no = 0;
 var mode;
+var load_count=0;
+var prompt_to_load=[];
+var user_photo;
 var dataset_name;
+var extra_prompts_for_private=[];
+var extra_prompts_for_private_parent=[];
 var prompt_ai_response;
 var user_prompts = [];
 var isFlag=false;
@@ -58,8 +63,19 @@ textarea:focus, input:focus{
 
 $(function () {
 
+  // $('form').parent().css('display','none');
   
-
+  // $(document).on('click', function (event) {
+  //   var parent = $(event.target).parent();
+  //   if (!parent.hasClass('hidediv')) {
+  //     // Call your function here
+  //    $('form').parent().fadeToggle('1200ms');
+  //   }
+  // });
+  
+ 
+ $('textarea').eq(0).css('width','88%');
+  
   
   $(document).on('click','ol > li >a',function(){
     let check_for_chat=setInterval(()=>{
@@ -101,19 +117,29 @@ $(function () {
   }
 
 
-  $(document).on('DOMNodeInserted', '.relative.flex.flex-col.items-stretch.justify-center.gap-2:eq(0)', function () {
-    //Checking to see if the text which appears if GPT4 mode is
-    if (document.querySelectorAll('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600')[0]) {
-      gpt_mode = 'GPT4'
+  // $(document).on('DOMNodeInserted', '.relative.flex.flex-col.items-stretch.justify-center.gap-2:eq(0)', function () {
+  //   //Checking to see if the text which appears if GPT4 mode is
+  //   if (document.querySelectorAll('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600')[0]) {
+  //     gpt_mode = 'GPT4'
 
       
-    }
-    else{
-      gpt_mode='GPT3'
-    }
+  //   }
+  //   else{
+  //     gpt_mode='GPT3'
+  //   }
 
    
-  })
+  // })
+
+  if (window.location.href.includes('gpt-4')) {
+    gpt_mode='GPT4'
+  }
+  else{
+    gpt_mode='GPT3'
+  }
+
+
+
 
   // $(document).on('DOMNodeInserted', '.h - 32.flex - shrink - 0', function () {
   //   //Checking to see if the text which appears if GPT4 mode is
@@ -133,8 +159,8 @@ $(function () {
     let id = $(this)[0].id;
     prompt_to_edit = all_prompts.filter((item) => item._id === id);
     $("#loading_gif_2").show();
-    chrome.runtime.sendMessage({ type: 'fetching_template_content', id: prompt_to_edit[0]._id }, function (response) {
-      all_template_content=response.data.template;
+    // chrome.runtime.sendMessage({ type: 'fetching_template_content', id: prompt_to_edit[0]._id }, function (response) {
+      // all_template_content=response.data.template;
       $("#loading_gif_2").hide();
     $('#upper_side_menu_content').addClass('blur-effect');
     $(blur_selector).addClass("blur-effect");
@@ -160,7 +186,7 @@ $(function () {
 
     }
   })
-  })
+  // })
 
 
   $(document).on('click','#profile_icon',function(){
@@ -172,6 +198,23 @@ $(function () {
 
   $(document).on('click', '#Advance_filters', function () {
     $('#menu-tabs').toggle();
+  })
+
+  $(document).on('click','#unselect_prompt',function(){
+    if($('#authordiv').length){
+      $('#authordiv').remove();
+      
+    }
+    if ($('#user_image_div').length){
+      $('#user_image_div').remove();
+    }
+    template_content = '';
+    $('textarea').val('');
+    $('textarea').prop('placeholder','Send a message');
+   prompt_selected=[];
+  $('.hidediv').css('background','black');
+   
+    
   })
 
 
@@ -232,9 +275,10 @@ $(function () {
     }
   })
 
-
+  
   //SubmitButton
   const submit1 = () => {
+    
     data = $("textarea").val();
     let text_data = data;
     if (!data) {
@@ -272,7 +316,7 @@ $(function () {
         data = all_words.join(' ');
         // template_content.replace()
       }
-
+     
       $("textarea").val(data);
       $('#top_bar').hide();
       template_content = '';
@@ -298,9 +342,14 @@ $(function () {
 
 
   
-  
-       $(gpt_submit_selector).click();
-     
+      
+       
+          $(gpt_submit_selector).click();
+        
+       
+      if ($('#unselect_prompt').length){
+        $('#unselect_prompt').remove();
+      }
     
 
 
@@ -530,8 +579,8 @@ $(function () {
                 if (childPrompt[0].hint) {
                   $("textarea").prop("placeholder", childPrompt[0].hint);
                 }
-                template_content = all_template_content[choosing_template_content];
-                choosing_template_content++;
+                template_content = childPrompt[0].template;
+                // choosing_template_content++;
                 if ($("#authordiv").length > 0) {
                   $("#authordiv").remove();
                 }
@@ -551,8 +600,10 @@ $(function () {
                 $('#language-select-wrapper').append(`<div  id='user_image_div' style="position: absolute;
             top: 10px;
             left: 30px; display:flex;" > 
-            <p style="color:white;font-size:12px"> &nbsp @  ${prompt_selected[0].user.username}  </p>
+            <p  style="color:white;font-size:12px;"> &nbsp @  ${prompt_selected[0].user.username}  </p>
             </div>`)
+
+                $('#unselect_prompt').prop('disabled', true);
 
 
                 $('.prompt_stacking_div').append(` <div  id="prompt_stacking_div_1" style="height: 50px;
@@ -609,8 +660,9 @@ $(function () {
                           
                           `)
 
-
+                    
                   }
+                  
                   else {
 
                     $('.prompt_stacking_div').append(`
@@ -783,7 +835,7 @@ $(function () {
   // };
 
   $(document).on('click', '.prompt_ai_logo', function () {
-    document.querySelectorAll('nav >div')[0].firstChild.click();
+    document.querySelectorAll('nav >div')[1].firstChild.click();
 
   })
 
@@ -831,20 +883,42 @@ $(function () {
 
     // global_api_response=extra_prompts;
     chrome.runtime.sendMessage({ type: "fetch_prompts", id: userId, page: page }, function (response) {
+      console.log(response);
+      
+      if(btn_click=='Public'){
+        if (response.data.public_prompts.length === 0) {
+          alert('no more data exists');
+          $('#loading_gif_2').hide();
+        }
+        else{
+          extra_prompts = response.data.public_prompts;
+          extra_parent_prompts = extra_prompts.filter((item) => (item.cID && !item.pID) || (!item.cID && !item.pID));
+          all_prompts = ([...all_prompts, ...extra_prompts]);
+          $('#loading_gif_2').hide();
+          fetchExtraPublicPrompts();
+        }
 
-      if (response.data.public_prompts.length === 0) {
-        alert('no more data exists');
-        $('#loading_gif_2').hide();
       }
-      else {
+      
+      else if(btn_click=='Private') {
+        console.log(response);
 
-        extra_prompts = response.data.public_prompts;
-        extra_parent_prompts = extra_prompts.filter((item) => (item.cID && !item.pID) || (!item.cID && !item.pID));
+        if (response.data.user_prompts.length === 0) {
+          alert('no more data exists');
+          $('#loading_gif_2').hide();
+        }
+        else{
+          extra_prompts_for_private = response.data.user_prompts;
+          extra_prompts_for_private_parent = extra_prompts_for_private.filter((item) => (item.cID && !item.pID) || (!item.cID && !item.pID))
+          all_prompts = ([...all_prompts, ...extra_prompts_for_private]);
+          $('#loading_gif_2').hide();
+         fetchExtraPrivatePrompts();
 
-        all_prompts = ([...all_prompts, ...extra_prompts]);
+        }
+       
+       
 
-        $('#loading_gif_2').hide();
-        fetchExtraPublicPrompts();
+  
 
 
       }
@@ -928,6 +1002,7 @@ $(function () {
 
 
   const fetchPersonalPrompts = () => {
+    console.log('clicked');
 
     // console.log(user_prompts);
 
@@ -1100,23 +1175,61 @@ $(function () {
 
         )
 
+      
+
 
 
 
       }
 
-      var target = $('a[href="#"]');
-      var offset = $(target).offset().top;
-      $('.flex-1.overflow-hidden >div >div').eq(1).animate({ scrollTop: offset }, 500);
-    }
+     
+   
 
 
-    if ($('#adding_padding').length) {
-      $('#adding_padding').remove();
+
+     
     }
-    $('#main_div').eq(0).after(`<div id='adding_padding' style="padding-bottom:15%"> </div>
+    $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%;padding-bottom:15%">
+          
+          <div id='Forward_button_div'  >  <h4 style="color:#28a47a"  id='next_page'> Show More </h4>   </div>
+          </div>
     
     `)
+
+
+
+
+
+
+    if (category_selected) {
+      if ($('#Pagination_div').length) {
+        $('#Pagination_div').remove();
+      }
+
+    }
+
+    if (($('.relative.flex.flex-col.items-stretch.justify-center.gap-2').eq(0).length || is_premium)) {
+      if ($('#Pagination_div').length) {
+        $('#Pagination_div').remove();
+      }
+
+
+      $('#main_div').eq(0).after(`<div id='Pagination_div' class="container" style="display:flex;justify-content:center;gap:20px;margin-top:10px;width:95%">
+          
+          <div id='Forward_button_div'  >  <h4 style="color:#28a47a"  id='next_page'> Show More </h4>   </div>
+          </div>
+    
+    `)
+
+
+
+      // $('#Pagination_div').css('padding-bottom','100px');
+      $('#Pagination_div').css('padding-bottom', '25%');
+
+    }
+
+
+  
 
 
   };
@@ -1169,7 +1282,7 @@ $(function () {
 
 
   $(document).on('click', '#new_chat_div', function () {
-    document.querySelectorAll('nav >div')[0].firstChild.click();
+    document.querySelectorAll('nav >div')[1].firstChild.click();
 
 
   })
@@ -1499,7 +1612,7 @@ $(function () {
     $('#new_prompt_template').val(template);
     if (prompt_to_edit.length) {
       $('#title_heading >h5').text('Edit your prompt');
-      $('#new_prompt_template').val(all_template_content[edit_child_prompt_template]);
+      $('#new_prompt_template').val(prompt_to_edit[0].template);
     }
 
   })
@@ -1696,12 +1809,14 @@ $(function () {
   });
 
   $(document).on('click','#toggle_extension_state_inactive',function(){
-    isExtensionActive = true;
+   sessionStorage.setItem('isExtensionActive','true');
+   isExtensionActive=true;
      extension_enabled();
 
   })
 
   $(document).on('click','#toggle_extension_state_active',function(){
+    sessionStorage.setItem('isExtensionActive', 'false');
     isExtensionActive=false;
    extension_disabled();
 
@@ -1719,9 +1834,47 @@ $(function () {
     if (e.keyCode == 13) {
       e.preventDefault();
       submit1();
+      
     }
   });
 
+ 
+  $(document).on('click','#upload_user_profile_image',function(){
+    $('#profile_image_select').click();
+  })
+
+
+  $(document).on('change','#profile_image_select',function(e){
+var files=e.target.files[0];
+
+if(files.type =='image/png' || files.type=='image/jpeg' ){
+  var reader = new FileReader();
+  
+ reader.readAsDataURL(files);
+  reader.onload = function (e) {
+  
+   
+   
+    user_photo=e.target.result
+    $('#photo_placeholder').empty();
+    $('#photo_placeholder').append(` <img src='${user_photo}' style="width:100%;height:100%;border-radius:50%" /> `)
+
+
+  };
+
+  
+
+
+}
+
+else{
+alert('Image format is not supported');
+
+}
+
+
+
+  })
 
  
 
@@ -1754,10 +1907,10 @@ $(function () {
     });
 
     $('.hidediv').css('background', '');
-    $(this).css('background', '#FFFFFF1A');
+    $(this).css('background', 'rgba(0, 194, 140, 0.1)');
 
     if (prompt_selected.length>0) {
-      $(`#${prompt_selected[0]._id}`).eq(0).closest('.hidediv').css('background', '#FFFFFF1A')
+      $(`#${prompt_selected[0]._id}`).eq(0).closest('.hidediv').css('background', 'rgba(0, 194, 140, 0.1)')
     }
 
 
@@ -1800,7 +1953,7 @@ $(function () {
     });
 
     if (prompt_selected.length>0) {
-      $(`#${prompt_selected[0]._id}`).eq(0).closest('.hidediv').css('background', '#FFFFFF1A')
+      $(`#${prompt_selected[0]._id}`).eq(0).closest('.hidediv').css('background', 'rgba(0, 194, 140, 0.1)')
     }
 
     let id = $(this)[0].id
@@ -1832,6 +1985,13 @@ $(function () {
 
   //Updating View value of a prompt and appending prompt info in textarea
   $(document).on("click", ".promptcard", function () {
+    load_count++;
+
+  //  let isDisplay= $('form').parent().css('display');
+  // if(isDisplay=='none'){
+  //   $('form').parent().fadeToggle('1500ms');
+  // }
+   
     template = '';
     template_content='';
     csv_file_content='';
@@ -1848,16 +2008,32 @@ $(function () {
     // $('#hidediv').addClass('active');
 
     $('.hidediv').css('background', '');
-    $(this).closest('.hidediv').css('background', '#FFFFFF1A');
+    $(this).closest('.hidediv').css('background', 'rgba(0, 194, 140, 0.1)');
 
 
     $('textarea').prop('disabled',true);
 
-
-
+if(load_count===1){
+  if (prompt_to_load.length) {
+    prompt_selected = prompt_to_load;
+  }
+  else{
     prompt_selected = all_prompts.filter(
       (item) => item._id === $(this)[0].id
     );
+  }
+  
+
+}
+
+else if(load_count>=2){
+  prompt_selected = all_prompts.filter(
+    (item) => item._id === $(this)[0].id
+  );
+}
+    
+
+    
     // if (prompt_selected.length === 0) {
     //   prompt_selected = user_prompts.filter(
     //     (item) => item._id === $(this)[0].id
@@ -1867,12 +2043,12 @@ $(function () {
       csv_file_content = prompt_selected[0].file_content;
     }
 
-    console.log(prompt_selected);
+    
     
     $("#loading_gif_2").show();
-    chrome.runtime.sendMessage({ type:'fetching_template_content',id:prompt_selected[0]._id},function(response){
+    // chrome.runtime.sendMessage({ type:'fetching_template_content',id:prompt_selected[0]._id},function(response){
      
-     all_template_content=response.data.template;
+    //  all_template_content=response.data.template;
      
       $("#loading_gif_2").hide();
       $('textarea').prop('disabled', false);
@@ -1911,7 +2087,7 @@ $(function () {
         }
 
         $("textarea").prop("placeholder", prompt_selected[0].hint);
-        template_content = response.data.template[0];
+        template_content = prompt_selected[0].template;
         $(".AIPRM__flex .AIPRM__w-full").prepend(`
                 <div id="authordiv" class="prompt_stacking_div" style="display: flex;
               margin-bottom: 5px;
@@ -1926,8 +2102,10 @@ $(function () {
 
         $('#language-select-wrapper').append(`<div  id='user_image_div' style="position: absolute;
             top: 10px;
-            left: 30px; display:flex;" > 
-            <p style="color:white;font-size:12px"> &nbsp @  ${prompt_selected[0].user.username}  </p>
+            left: 30px; display:flex;align-items:center" > 
+            <p  style="color:white;font-size:12px;cursor:pointer"> &nbsp @  ${prompt_selected[0].user.username}  </p>
+            <img style='height:10px;margin-left:5px;cursor:pointer' id='unselect_prompt' src='${cross}'  />
+              
             </div>`)
 
 
@@ -2081,7 +2259,7 @@ $(function () {
       else {
 
         $("textarea").prop("placeholder", prompt_selected[0].hint);
-        template_content = response.data.template[0];
+        template_content = prompt_selected[0].template;
         if ($("#authordiv").length > 0) {
           $("#authordiv").remove();
         }
@@ -2101,8 +2279,10 @@ $(function () {
 
         $('#language-select-wrapper').append(`<div id='user_image_div' style="position: absolute;
             top: 10px;
-            left: 30px; display:flex;" > 
-            <p style="color:white;font-size:12px"> &nbsp @  ${prompt_selected[0].user.username}  </p>
+            left: 30px; display:flex;align-items:center" > 
+            <p  style="color:white;font-size:12px;cursor:pointer"> &nbsp @  ${prompt_selected[0].user.username}  </p>
+            <img id='unselect_prompt' style='height: 10px;
+                        margin-left: 5px;cursor:pointer' src='${cross}'  />
             </div>`)
 
         $('.prompt_stacking_div').append(`<div  id="prompt_stacking_div_1" style="height: 50px;
@@ -2120,7 +2300,7 @@ $(function () {
 
 
 
-    })
+    // })
     
 
 
@@ -2163,16 +2343,17 @@ $(function () {
     if (check_gpt_mode == 'GPT3') {
       document.querySelectorAll(gpt_mode_selector)[0].click();
       gpt_mode='GPT3';
+      $('#switchMonthly').click();
     
-      $('#gpt_3').css('background','#00C28C');
-      $('#gpt_4').css('background','black');
+      // $('#gpt_3').css('background','#00C28C');
+      // $('#gpt_4').css('background','black');
     }
     else if (check_gpt_mode == 'GPT4') {
       document.querySelectorAll(gpt_mode_selector)[1].click()
       gpt_mode='GPT4'
-     
-      $('#gpt_3').css('background', 'black');
-      $('#gpt_4').css('background', '#00C28C');
+      $('#switchYearly').click();
+      // $('#gpt_3').css('background', 'black');
+      // $('#gpt_4').css('background', '#00C28C');
       setTimeout(() => {
         $('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600').eq(0).css('display', 'none');
       }, 500)
@@ -2319,6 +2500,193 @@ $(function () {
      
 
   })
+  
+
+  $(document).on('click','#save_username',function(){
+    $('#loading_gif_for_create_username').show()
+    let new_username = $('#username').val();
+    let password = $('#password').val();
+    if(!new_username || !password ){
+      alert('Please Enter username');
+      $('#loading_gif_for_create_username').hide();
+    }
+    else{
+      chrome.runtime.sendMessage({ type: 'inserting_username', email: email, new_username, user_photo,password }, function (response) {
+        console.log(response);
+        if (response.data.message == 'Username is already taken') {
+
+          alert('Username is alreay taken please try a different one')
+          return $('#loading_gif_for_create_username').hide()
+        }
+        chrome.runtime.sendMessage({ type: 'logging_in', email: email }, function (response) {
+          window.location.reload();
+
+
+        })
+
+      })
+    }
+ 
+  
+
+  })
+
+  $(document).on('click','#logging_in_first_time',function(){
+    blur_background();
+    $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
+             
+             <div id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    ">
+            <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+            padding-right: 4.25%;
+            cursor:pointer"  alt='cross_btn'  />  </div>
+            <div style="margin-top:30px;display:flex;justify-content:center" > <img src='${prompt_ai_logo}'  alt='prompt_ai_logo' /> </div>
+            <div  style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
+            <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
+            
+            <div id= 'log_in' style="display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 54px;
+              cursor:pointer;
+              width: 208px;
+              background: #00C28C;
+              margin-left: 27%;
+              border-radius: 20px;
+              margin-top: 10%;" > 
+              <div style="display:flex;padding-left:5%" > <img src="${profile_image}"  />  
+              <p style="color:white;margin-left:7px"> Sign in With Open AI   </p>
+              </div>
+            </div>
+
+
+            <div style="margin-top:20%;display:flex;justify-content:center;align-items:center" > <h4 style="color:white"> Don't have an account?  </h4>  
+            <h4 style="color:#00C28C"> Sign up </h4>
+            </div>
+
+
+            </div>
+            
+            </div>
+           `)
+
+
+  })
+
+
+  $(document).on('click','#continue_to_create_username',function(){
+    $('#main_pop_up').remove();
+    $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
+             
+             <div id='create_username_div'style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;">
+
+
+                  <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+                                                                                                    cursor:pointer;
+                                                                                                    padding-right: 4.25%;"  alt='cross_btn' />  
+                      </div> 
+
+                      <div id='profile_pic_div' style="display: flex;
+                                                      align-items: center;
+                                                      width: 100%;
+                                                      height: 20%;
+                                                      margin-top: 5%;
+                                                      justify-content: center;" > 
+                       <img  src='${user_photo}' alt='image_to_be_displayed' style="width: 111px;
+                                                                                    height: 110px;
+                                                                                    border-radius: 50%;
+                                                                                    margin-right: 27%;"  />
+                      </div>
+
+
+                      <div style="display: flex;
+                                  justify-content: center;
+                                  margin-top: 7%;
+                                  margin-right: 27%;" >
+                       <h4 style="color:white" > Create a username </h4>
+                      </div>
+
+                  
+                      <div style="width: 100%;
+                                  display: flex;
+                                  align-items: center;
+                                  margin-top: 3%;
+                                  padding-inline: 4%;" >  
+                      
+                                        <input id='username' placeholder='@username' type='text' style="width: 329px;
+                                                                                          padding-inline: 2%;
+                                                                                          outline: none;
+                                                                                          box-shadow: none;
+                                                                                          border-radius: 11px;
+                                                                                          background: #050A08;
+                                                                                          height: 39px;
+                                                                                          color:white"   />
+
+                      </div>
+
+
+
+                        <div style="display: flex;
+                                  justify-content: center;
+                                  margin-top: 7%;
+                                  margin-right: 27%;" >
+                       <h4 style="color:white" > Create a password </h4>
+                      </div>
+
+                  
+                      <div style="width: 100%;
+                                  display: flex;
+                                  align-items: center;
+                                  margin-top: 3%;
+                                  padding-inline: 4%;" >  
+                      
+                                        <input id='password' placeholder='@password' type='password' style="width: 329px;
+                                                                                          padding-inline: 2%;
+                                                                                          outline: none;
+                                                                                          box-shadow: none;
+                                                                                          border-radius: 11px;
+                                                                                          background: #050A08;
+                                                                                          height: 39px;
+                                                                                          color:white"   />
+
+                      </div>
+
+
+
+                        <div style="height:40%;width:100%;margin-top:11%;display:flex;justify-content:center">
+             <button  id='save_username' style="height:48px;width:97px;border-radius:20px;background:#00C28C;color:white;margin-right:13%"> Continue   </button>
+            </div>
+              
+            <div id="loading_gif_for_create_username" style="display:none; z-index: 10000000">
+                <img style="height: 60px;
+                            position: fixed;
+                            top: 45%;
+                            left: 47%;" id="loading-image" src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif" alt="Loading..." />
+              </div>
+            </div>
+
+
+
+
+
+
+            </div>
+            
+           `)
+    
+  })
 
 
   $(document).on("click", "#crossbtn", function () {
@@ -2358,6 +2726,15 @@ $(function () {
     $('#public_btn').css("background", "black");
   })
 
+  $(document).on('click','#gpt_3_button',function(){
+    document.querySelectorAll(gpt_mode_selector)[0].click();
+    gpt_mode='GPT3'
+  })
+
+  $(document).on('click', '#gpt_4_button', function () {
+    document.querySelectorAll(gpt_mode_selector)[1].click();
+    gpt_mode = 'GPT4'
+  })
   $(document).on("click", "#continue_to_prompt_screen_2", function () {
 
 
@@ -2369,8 +2746,8 @@ $(function () {
 
     if (prompt_to_edit.length) {
       $('#title_heading >h5').text('Edit your prompt');
-      $('#new_prompt_template').val(all_template_content[edit_child_prompt_template]);
-      template = all_template_content[edit_child_prompt_template];
+      $('#new_prompt_template').val(prompt_to_edit[0].template);
+      template = prompt_to_edit[0].template;
 
     }
 
@@ -2467,12 +2844,9 @@ $(function () {
 
   $(document).on('click','#search_icon',function(){
   
-    if($(gpt_mode_selector).length){
-      // $('#custom_gpt_mode_div').toggle();
-     
-    }
-    $('#searchbar').toggle();
-    $('#search_button').toggle();
+    $('.switches-container').fadeToggle('slow');
+    $('#searchbar').fadeToggle('slow');
+    $('#search_button').fadeToggle('slow');
   })
 
   $(document).on('change', '#select_topic', function () {
@@ -2661,6 +3035,8 @@ $(function () {
   const fetchExtraPublicPrompts = () => {
 
 
+  
+
 
     for (let i = 0; i < extra_parent_prompts.length; i++) {
       let data = extra_parent_prompts[i];
@@ -2735,14 +3111,167 @@ $(function () {
 
   }
 
+  const fetchExtraPrivatePrompts=()=>{
+
+    
+
+    for (let i = 0; i < extra_prompts_for_private_parent.length; i++) {
+      let data = extra_prompts_for_private_parent[i];
 
 
+      $("#main_div").append(`<div class='col-lg-4 main_personal_prompt_div' style="display:flex;width:100%;height: 280px;max-width:500px"  >
+
+      <div class=" hidediv" id='${data._id}'  style="border-radius:8px;border:1;background-color:#000;width:100%;box-shadow:1px 0px 3px 3px #28a47a77;">
+     
+      <div style="display:flex;width: 100%;" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+          </svg>
+          <p style="color:#FFFFFF;width: 100%;">  &nbsp <span style="text-decoration:underline;color:#FFFFFF"> ${data.author} </span>  </p>
+          <div style="display:flex;gap:30px">
+          <button class='buybtn' id='${data._id}' style="width:60px; visibility:hidden; border-radius:10px;color:white;background-color:#00C28C;border:2px solid #00C28C;height:30px"> Buy </button>
+          <button class='heart' id=${data._id} type='button'> <svg  style="color:white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+</svg> </button>
+      </div>
+      </div>
+     
+
+  <div class="promptcard" id=${data._id}  >
+      <h2 style="color: #00c08b; height:60px;overflow:hidden;"> ${data.title} </h2>
+      
+      
+
+      <div style="margin-top:5px">
+          <p style="color:	#FFFFFF;height: 65px;overflow: hidden;">  ${data.teaser} </p>
+      </div>
+  </div>
+
+  <div class="my-3" style="display:flex;justify-content:space-between;align-items:center;position:relative;top:35px;color:#FFFFFF">
+      
+
+    <div class="d-flex mx-2" style="gap:10px">
+          <div style="display:flex"><button id=${data._id} class='publicupvote' type='button' > <img src="${uparrow}" alt="vCZC4.png" border="0" /> </button>
+              <p>  &nbsp ${Math.ceil(data.likes)}  </p>
+          </div>
+          
+      </div>
+
+
+
+       <div class='d-flex mx-2'  >  <button type='button' class='views' id=${data._id} >  <svg id='eye' xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+      </svg>  </button>  <p> &nbsp  ${data.views} </p>  </div>
+
+      <div class='d-flex mx-2'> <img src="${comment}" alt="vCiKz.png" border="0" /> <p> &nbsp ${data.comments} </p>  </div>
+
+       
+     
+
+
+     
+
+      
+  </div>
+      </div>`)
+
+
+
+
+
+
+
+
+    }
+    
+  }
+
+
+
+  $(document).on('click','#sign_in',function(){
+    chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
+  window.location.reload();
+
+})
+  })
 
 
   $(document).on('click','#log_in',function(){
-chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
-  window.location.reload();
-})
+// chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
+//   window.location.reload();
+
+// })
+
+    $('#main_pop_up').remove();
+    $('#connect_with_openai_div').remove();
+    $('#feature_div').remove();
+     $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        transition:5s;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
+             
+             <div id='user_image_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    ">
+
+                  <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+                                                                                                    cursor:pointer;
+                                                                                                    padding-right: 4.25%;"  alt='cross_btn' />  
+                      </div>   
+                      
+                      <div style="height: 40%;
+                                  width: 100%;
+                                  display: flex;
+                                  justify-content: center;
+                                  align-items: center;
+                                  margin-top: 0%;" >  
+                       <div id='photo_placeholder' style="display: flex;
+                                  align-items: center;
+                                  justify-content: center;
+                                  height: 129.27px;
+                                  width: 129.27px;
+                                  border-radius: 50%;
+                                  margin-right: 17%;
+                                  background:#1e2221 ;
+                                  "> 
+                               
+                                  <img  src='${default_photo}' alt='default_image'  />
+
+                                  
+                                  </div>
+                      </div>
+
+                <div style="display: flex;
+                            justify-content: center;
+                            margin-top: -4%;
+                            margin-right: 14%;
+                        " > <h5 id='upload_user_profile_image' style="color:#00C28C;text-decoration:underline;cursor:pointer" > Upload Photo </h5>  </div>
+                    <input style="display:none" type="file" id='profile_image_select'  />
+                 <div style="height:40%;width:100%;margin-top:29%;display:flex;justify-content:center">
+             <button id='continue_to_create_username' style="height:48px;width:97px;border-radius:20px;background:#00C28C;color:white;margin-right:13%"> Continue   </button>
+            </div>
+            
+            
+
+
+
+            </div>
+
+
+           
+            
+            </div>
+           `)
+           if(user_photo){
+            $('#photo_placeholder').empty();
+             $('#photo_placeholder').append(` <img src='${user_photo}' style="width:100%;height:100%;border-radius:50%" /> `)
+           }
+
+
   })
 
 
@@ -2997,64 +3526,46 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
 
   $(document).on('click', '.relative.flex.w-full.items-center.justify-center.gap-1.rounded-lg.border.py-3:eq(0)', function () {
     gpt_mode='GPT3';
-    document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:#00C28C !important';
-    document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:black !important';
-    $('#writingStyleSelect').empty();
-    $('#writingStyleSelect').append(`<option value='GPT3'> ChatGPT-3.5 </option>
+    if (isExtensionActive === true) {
+      // document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:#00C28C !important';
+      // document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:black !important';
+      $('#writingStyleSelect').empty();
+      $('#writingStyleSelect').append(`<option value='GPT3'> ChatGPT-3.5 </option>
     <option value='GPT4'> ChatGPT4 </option>  `)
+
+    }
+    else if(isExtensionActive===false){
+      // document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:white !important';
+      // document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:#d9d9e3 !important';
+    }
     
   })
 
   $(document).on('click', '.relative.flex.w-full.items-center.justify-center.gap-1.rounded-lg.border.py-3:eq(1)', function () {
     gpt_mode = 'GPT4';
-    document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:black !important';
-    document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:#00C28C !important';
-    $('#writingStyleSelect').empty();
-    $('#writingStyleSelect').append(`<option value='GPT4'> ChatGPT4 </option>
+    if (isExtensionActive === true) {
+      // document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:black !important';
+      // document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:#00C28C !important';
+      $('#writingStyleSelect').empty();
+      $('#writingStyleSelect').append(`<option value='GPT4'> GPT-4 </option>
     <option value='GPT3'> ChatGPT3.5 </option>  `)
+setTimeout(()=>{
+  $('.stretch.mx-2.mb-2.text-center.text-xs.text-gray-600').eq(0).css('display', 'none');
+},500)
+    }
+    else if (isExtensionActive === false) {
+      document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:#d9d9e3 !important';
+      document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:white !important';
+    }
+
 
   })
 
 
 
-  $(document).on('mouseenter','#custom_gpt_mode_div',function(){
-     
-   
-      // $('#custom_gpt_mode_div').hide()
-      // $(`${gpt_mode_selector_div} >div  `).eq(0).css('z-index', '10000');
 
-      // if (gpt_mode == 'GPT3') {
-      //   document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:#00C28C !important'
 
-      //   document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:black !important'
-      // }
-      // else if (gpt_mode == 'GPT4') {
-      //   document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background:#00C28C !important'
-      //   document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background:black !important'
-      // }
-         
-    
 
-  })
-
-  $(document).on('mouseenter','#main_screen_div',function(e){
-   
-// console.log(gpt_mode);
-//     $(`${gpt_mode_selector_div} >div` ).eq(0).css('z-index', '0');
-//     $('#custom_gpt_mode_div').show();
-//     if (gpt_mode == 'GPT3') {
-//       $('#gpt_3').css('background','#00C28C');
-//       $('#gpt_4').css('background', 'black');
-      
-    
-//     }
-//     else if (gpt_mode == 'GPT4') {
-//       $('#gpt_4').css('background', '#00C28C');
-//       $('#gpt_3').css('background','black');
-     
-//     }
-
-  })
 
   $(document).on('click', '#Free_filter_button', function () {
     $(this).css('background-color', '#595d5c');
@@ -3074,6 +3585,31 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
   })
 
 
+
+$(document).on('click','#browser_mode',function(){
+  window.location.href = 'https://chat.openai.com/?model=gpt-4-browsing';
+  window.location.reload();
+})
+
+$(document).on('click','#default_mode',function(){
+  if (window.location.href =='https://chat.openai.com/?model=gpt-4'){
+    return;
+  }
+  else{
+    window.location.href ='https://chat.openai.com/?model=gpt-4';
+    window.location.reload();
+  }
+})
+
+  $(document).on('click', '#plugins_mode', function () {
+  
+    window.location.href = 'https://chat.openai.com/?model=gpt-4-plugins';
+      window.location.reload();
+    
+  })
+
+
+ 
 
   $(document).on('click', '#Paid_filter_button', function () {
     free_filter = false;
@@ -3117,8 +3653,10 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
 
     if (this.className == gpt_new_chat || this.children[0].className == 'flex py-3 px-3 items-center gap-3 transition-colors duration-200 text-white cursor-pointer text-sm rounded-md border border-white/20 hover:bg-gray-500/10 mb-1 flex-shrink-0') {
       setTimeout(()=>{
-
+       user_photo=''
+       load_count=0;
         gpt_mode='3.5';
+        prompt_to_load=[];
         user_request_count = 0;
         prompt_no_count = 1;
         response_no = 0;
@@ -3145,6 +3683,7 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
           $("textarea").eq(0).parent().css("margin-left", "42%");
           $('textarea').eq(0).parent().addClass('text_area_to_center');
           $("textarea").eq(0).parent().css("color", "#FFF");
+          $('textarea').eq(0).css('width','88%');
 
           document.querySelectorAll('textarea')[0].parentNode.style.cssText += 'background:black !important';
 
@@ -3192,13 +3731,13 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
           }
           if (gpt_mode == 'GPT4') {
             $(gpt_mode_selector).eq(1).click();
-            $('#gpt_4').css('background', '#00C28C');
-            $('#gpt_3').css('background', 'black');
+            // $('#gpt_4').css('background', '#00C28C');
+            // $('#gpt_3').css('background', 'black');
           }
           else if (gpt_mode == 'GPT3') {
             $(gpt_mode_selector).eq(0).click();
-            $('#gpt_4').css('background', 'black');
-            $('#gpt_3').css('background', '#00C28C');
+            // $('#gpt_4').css('background', 'black');
+            // $('#gpt_3').css('background', '#00C28C');
           }
 
 
@@ -3292,10 +3831,12 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
 
  
   function Intialize_mainscreen_elements() {
+   
 
     chrome.runtime.sendMessage({ type:'fetching_selectors'},function(response){
     
-      blur_selector=response.data.selectors[0].blur_selector;
+      if(response.data.selectors.length){
+          blur_selector=response.data.selectors[0].blur_selector;
       request_selector = response.data.selectors[0].request_selector;
       response_selector = response.data.selectors[0].response_selector;
       cancel_or_stop_button_free_version = response.data.selectors[0].cancel_or_stop_button_free_version;
@@ -3309,9 +3850,14 @@ chrome.runtime.sendMessage({type:'logging_in', email:email },function(response){
       gpt_new_chat = response.data.selectors[0].gpt_new_chat;
       hide_nav_menu_button = response.data.selectors[0].hide_nav_menu_button
 
+      }
+    
+
     
 
 $('nav').eq(0).addClass('custom_nav');
+
+     
 
 
 
@@ -3325,8 +3871,10 @@ $('nav').eq(0).addClass('custom_nav');
           }
 
           $("textarea").eq(0).parent().append(our_submit_button);
+          
           main_screen_for_user_not_logged_in();
           appending_side_menu();
+          
 
          
           $(document).off('mouseenter', '.promptcard');
@@ -3335,24 +3883,31 @@ $('nav').eq(0).addClass('custom_nav');
           $(document).off('mouseleave', '.promptcard');
           $(document).on('click', '.hidediv', function () {
             blur_background();
-            $('body').append(` ${feature_popup}
+
+            $('body').append(`
+            
+            <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        display: flex;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px
+                        " >
+            
+            ${feature_popup}
                 
-           <div id='connect_with_openai_div' style="width: 428px;
-                                                     height: 464px;
-                                                     position: fixed;
-                                                     left: 58%;
-                                                     top: 20%;
-                                                     background: black;
-                                                     box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px;"
-  >
-    <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+           <div  id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                   "
+                                                  >
+    <div  style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             cursor:pointer;
             padding-right: 4.25%;"  alt='cross_btn' />  </div>
     <div style="margin-top:30px;display:flex;justify-content:center" > <img src='${prompt_ai_logo}' alt='prompt_ai_logo' /> </div>
     <div style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
     <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
 
-    <div id='connect' style="display: flex;
+    <div id='log_in' style="display: flex;
               justify-content: center;
               align-items: center;
               height: 54px;
@@ -3372,7 +3927,11 @@ $('nav').eq(0).addClass('custom_nav');
       <h4 style="color:#00C28C"> Sign up </h4>
     </div>
   </div>
+  </div>
             `)
+            
+              // $('#connect').prop('disabled', true);
+            
           })
           $(document).on('click','#ownbutton',function(){
             if($('#feature_div').length){
@@ -3382,15 +3941,19 @@ $('nav').eq(0).addClass('custom_nav');
               $('#connect_with_openai_div').remove()
             }
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(`
+            
+            <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        display: flex;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px">
+            ${feature_popup}
                 
-            <div id='connect_with_openai_div' style="width: 428px;
-                                                     height: 464px;
-                                                     position: fixed;
-                                                     left: 58%;
-                                                     top: 20%;
-                                                     background: black;
-                                                     box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px;"
+            <div id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    "
   >
     <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             cursor:pointer;
@@ -3399,7 +3962,7 @@ $('nav').eq(0).addClass('custom_nav');
     <div style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
     <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
 
-    <div id='connect' style="display: flex;
+    <div id='log_in' style="display: flex;
               justify-content: center;
               align-items: center;
               height: 54px;
@@ -3419,7 +3982,9 @@ $('nav').eq(0).addClass('custom_nav');
       <h4 style="color:#00C28C"> Sign up </h4>
     </div>
   </div>
+  </div>
             `)
+            // $('#connect').prop('disabled', true);
 
           })
 
@@ -3431,24 +3996,29 @@ $('nav').eq(0).addClass('custom_nav');
             if ($('#connect_with_openai_div').length) {
               $('#connect_with_openai_div').remove()
             }
-            $('body').append(` ${feature_popup}
+            $('body').append(` 
+             <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        display: flex;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px
+                        " >
+
+            ${feature_popup}
                 
-           <div id='connect_with_openai_div' style="width: 428px;
-                                                     height: 464px;
-                                                     position: fixed;
-                                                     left: 58%;
-                                                     top: 20%;
-                                                     background: black;
-                                                     box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px;"
-  >
-    <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+           <div  id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                   "
+                                                  >
+    <div  style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             cursor:pointer;
             padding-right: 4.25%;"  alt='cross_btn' />  </div>
     <div style="margin-top:30px;display:flex;justify-content:center" > <img src='${prompt_ai_logo}' alt='prompt_ai_logo' /> </div>
     <div style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
     <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
 
-    <div id='connect' style="display: flex;
+    <div id='log_in' style="display: flex;
               justify-content: center;
               align-items: center;
               height: 54px;
@@ -3468,10 +4038,14 @@ $('nav').eq(0).addClass('custom_nav');
       <h4 style="color:#00C28C"> Sign up </h4>
     </div>
   </div>
+  </div>
+  
             `)
+            // $('#connect').prop('disabled', true);
           })
 
-          $(document).on('click','#Favourite',function(){
+          $('#Favourite').on('click',function(e){
+            
             if ($('#feature_div').length) {
               $('#feature_div').remove()
             }
@@ -3479,24 +4053,28 @@ $('nav').eq(0).addClass('custom_nav');
               $('#connect_with_openai_div').remove()
             }
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(`  <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        display: flex;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px
+                        " >
+            
+            ${feature_popup}
                 
-            <div id='connect_with_openai_div' style="width: 428px;
-                                                     height: 464px;
-                                                     position: fixed;
-                                                     left: 58%;
-                                                     top: 20%;
-                                                     background: black;
-                                                     box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px;"
-  >
-    <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
+           <div  id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                   "
+                                                  >
+    <div  style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             cursor:pointer;
             padding-right: 4.25%;"  alt='cross_btn' />  </div>
     <div style="margin-top:30px;display:flex;justify-content:center" > <img src='${prompt_ai_logo}' alt='prompt_ai_logo' /> </div>
     <div style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
     <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
 
-    <div id='connect' style="display: flex;
+    <div id='log_in' style="display: flex;
               justify-content: center;
               align-items: center;
               height: 54px;
@@ -3516,7 +4094,9 @@ $('nav').eq(0).addClass('custom_nav');
       <h4 style="color:#00C28C"> Sign up </h4>
     </div>
   </div>
+  </div>
             `)
+            // $('#connect').prop('disabled', true);
           })
 
 
@@ -3529,6 +4109,8 @@ $('nav').eq(0).addClass('custom_nav');
         }
        
         else if (response.data.status ==='logged_out'){
+          userId = response.data._id;
+          userInfo = response.data;
           isRegistered=true;
           $(gpt_submit_selector).css("visibility", "hidden");
            isUserLoggedIn=false;
@@ -3536,8 +4118,9 @@ $('nav').eq(0).addClass('custom_nav');
             is_premium = true
           }
           $("textarea").eq(0).parent().append(our_submit_button);
-          appending_side_menu()
+         
           main_screen_for_user_not_logged_in();
+          appending_side_menu()
 
           $(document).off('mouseenter', '.promptcard');
           $(document).off('mouseenter', '.hidediv');
@@ -3545,23 +4128,19 @@ $('nav').eq(0).addClass('custom_nav');
           $(document).off('mouseleave', '.promptcard');
 
           $(document).on('click','.hidediv',function(){
-            if ($('#feature_div').length) {
-              $('#feature_div').remove()
-            }
-            if ($('#connect_with_openai_div').length) {
-              $('#connect_with_openai_div').remove()
-            }
+           
             
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
              
-             <div id='connect_with_openai_div' style="width: 428px;
-                                                      height: 464px;
-                                                      position: fixed;
-                                                      left: 58%;
-                                                      top: 20%;
-                                                      background: black;
-                                                      box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px">
+             <div id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    ">
             <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             padding-right: 4.25%;
             cursor:pointer"  alt='cross_btn'  />  </div>
@@ -3569,7 +4148,7 @@ $('nav').eq(0).addClass('custom_nav');
             <div  style="display:flex;justify-content:center;margin-top:17px"> <h3 style="color:white"> Sign In with </h3>  </div>
             <div style="display:flex;justify-content:center" > <h3 style="color:#00C28C"> OpenAi </h3>  </div>
             
-            <div id='log_in' style="display: flex;
+            <div id=${userInfo.username? 'sign_in':'log_in'} style="display: flex;
               justify-content: center;
               align-items: center;
               height: 54px;
@@ -3592,10 +4171,17 @@ $('nav').eq(0).addClass('custom_nav');
 
             </div>
             
-            
+            </div>
            `)
+
+           
+          
             
-          })
+          }
+          
+          
+          )
+          
 
           $(document).on('click', '#ownbutton', function () {
             if ($('#feature_div').length) {
@@ -3606,15 +4192,16 @@ $('nav').eq(0).addClass('custom_nav');
             }
 
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;">  ${feature_popup}
              
-             <div id='connect_with_openai_div' style="width: 428px;
-                                                      height: 464px;
-                                                      position: fixed;
-                                                      left: 58%;
-                                                      top: 20%;
-                                                      background: black;
-                                                      box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px">
+             <div id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                   ">
             <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             padding-right: 4.25%;
             cursor:pointer"  alt='cross_btn'  />  </div>
@@ -3644,9 +4231,16 @@ $('nav').eq(0).addClass('custom_nav');
 
 
             </div>
+            </div>
             
             
            `)
+            if (userInfo.username) {
+              $('#log_in').attr('id', 'sign_in');
+            }
+            else {
+              $('#log_in').prop('disabled', false);
+            }
 
           })
 
@@ -3660,15 +4254,16 @@ $('nav').eq(0).addClass('custom_nav');
             }
 
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
              
-             <div id='connect_with_openai_div' style="width: 428px;
-                                                      height: 464px;
-                                                      position: fixed;
-                                                      left: 58%;
-                                                      top: 20%;
-                                                      background: black;
-                                                      box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px">
+             <div id='connect_with_openai_div' style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    ">
             <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             padding-right: 4.25%;
             cursor:pointer"  alt='cross_btn'  />  </div>
@@ -3698,9 +4293,15 @@ $('nav').eq(0).addClass('custom_nav');
 
 
             </div>
-            
+            </div>
             
            `)
+            if (userInfo.username) {
+              $('#log_in').attr('id', 'sign_in');
+            }
+            else {
+              $('#log_in').prop('disabled', false);
+            }
           })
 
           
@@ -3713,15 +4314,16 @@ $('nav').eq(0).addClass('custom_nav');
             }
 
             blur_background();
-            $('body').append(` ${feature_popup}
+            $('body').append(` <div id='main_pop_up' style="position: fixed;
+                        top: 20%;
+                        left: 38%;
+                        box-shadow:rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+                        display: flex;" > ${feature_popup}
              
-             <div id='connect_with_openai_div' style="width: 428px;
-                                                      height: 464px;
-                                                      position: fixed;
-                                                      left: 58%;
-                                                      top: 20%;
-                                                      background: black;
-                                                      box-shadow:rgba(40, 164, 122, 0.467) 5px 0px 3px 3px">
+             <div id='connect_with_openai_div'style="width: 493px;
+                                                    height: 464px;
+                                                    background: black;
+                                                    ">
             <div style="display:flex;justify-content:flex-end" >  <img id='crossbtn' src='${cross}' style="padding-top: 4.25%;
             padding-right: 4.25%;
             cursor:pointer"  alt='cross_btn'  />  </div>
@@ -3751,9 +4353,15 @@ $('nav').eq(0).addClass('custom_nav');
 
 
             </div>
-            
+            </div>
             
            `)
+            if (userInfo.username) {
+              $('#log_in').attr('id', 'sign_in');
+            }
+            else {
+              $('#log_in').prop('disabled', false);
+            }
           
           })
             
@@ -3813,7 +4421,7 @@ $('nav').eq(0).addClass('custom_nav');
                            <div style="padding-top:10px;margin-left: 40px;">  <img id='search_icon' src='${search_icon}' style="cursor:pointer" />  </div>
               <div style="    margin-right: 60px;padding-top:10px;margin-left: 40px;"> <b> <svg style="border-color:#39b291;color:#39b291" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
                   <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-              </svg> </b>  </div> <div style="position: relative;" >  <img id='profile_icon' style="border-radius:50%" src=${image} height='50px' width='40px' alt='Image to be shown' /> </div></div> 
+              </svg> </b>  </div> <div style="position: relative;" >  <img id='profile_icon' style="border-radius:50%" src=${userInfo.image ? userInfo.image : image } height='50px' width='40px' alt='Image to be shown' /> </div></div> 
                </div>
           </div>
           <div id="loading_gif_2" style="display:none; z-index: 10000000">
@@ -3822,42 +4430,52 @@ $('nav').eq(0).addClass('custom_nav');
                             top: 45%;
                             left: 47%;" id="loading-image" src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif" alt="Loading..." />
               </div>
+
+      
+
           `
           );
-
           if(is_premium===true){
-            // $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
-           
-            // $('#top_bar').prepend(`<div id='custom_gpt_mode_div' style="display: flex;
-                                               
-            //                                    position: absolute;
-            //                                    left: 41%;
-            //                                    width: 296px;
-            //                                    background: black;
-            //                                    height: 54px;border-radius:0.5rem" > <button id='gpt_3' style="color:white;width:50%;background:${gpt_mode == 'GPT3' ? '#00c08b':'black'};color:white;border-radius:10px;margin:1%" >  GPT-3.5 </button> 
-            //                                    <button id='gpt_4' style="color:white;width:50%;background:${gpt_mode == 'GPT4' ? '#00c08b' : 'black'};color:white;border-radius:8px;margin:1%" >  GPT-4 </button>
-            //                                    </div>`)
-                                        
+            $('#top_bar').append(`     <div class="switches-container" style=" position: absolute;
+                                                              left: 47%;
+                                                              top: 4%;" >
+                                    <input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked">
+                                    <input type="radio" id="switchYearly" name="switchPlan" value="Yearly">
+                                    <label id='gpt_3_button' for="switchMonthly">GPT-3.5</label>
+                                    <label id='gpt_4_button' for="switchYearly" class="gtp_4">GPT-4
+                                        <div class="version_info">
+                                            <p>Our most capable model, great for tasks that require creative and advanced reasoning</p>
+                                            <span>Available exclusively to plus users</span>
+                                            <ul>
+                                                <li id='default_mode'  style="" ><a href=${window.location.href == 'https://chat.openai.com/?model=gpt-4' ? '#' :'https://chat.openai.com/?model=gpt-4' } style="text-decoration:none;cursor:pointer" ><img src="${star}" alt=""> Default</a></li>
+                                                <li id='browser_mode' ><a href="https://chat.openai.com/?model=gpt-4-browsing" style="text-decoration:none;cursor:pointer"><img src="${browse}" alt=""> Browse with Bing</a></li>
+                                                <li id='plugins_mode' ><a href="https://chat.openai.com/?model=gpt-4-plugins" style="text-decoration:none;cursor:pointer"><img src="${plugins}" alt=""> Plugins</a></li>
+                                            </ul>
+                                        </div>
+                                    </label>
+                                    <div class="switch-wrapper">
+                                      <div class="switch">
+                                        <div>GPT-3.5</div>
+                                        <div>GPT-4</div>
+                                      </div>
+                                    </div>
+                                </div>`)
+                                if(gpt_mode=='GPT4'){
+                                  $('#switchYearly').click();
+                                }
           }
+
+        
 
           $('#top_bar').before(`<a style="color:white;display:none" id='navigating_to_top' href='#'> Navigate to me </a>`)
 
-          $('#main_screen_div').append(`<div id="logout_div" style="position: absolute;
-          z-index: 10;
-          top: 66px;
-          cursor: pointer;
-          float: right;
-          width: max-content;
-          box-shadow: 1px 0px 4px 2px #39b291;
-          font-size: 15px;
-          padding: 10px;
-          background-color: rgb(251, 251, 251);
-          right: 10.2px;
-          background: black;">
-          <span id="account" style="color:white" >Account</span><br>
-          <span id="btn_logout" style="color:white">Logout</span><br>
+          $('#main_screen_div').append(`<div id="logout_div" style="    position: absolute;z-index: 10;top: 66px;cursor: pointer;float: right;width: max-content;box-shadow: rgba(, 99, 99, 0.2) 0px 2px 8px 0px;font-size: 15px;padding: 10px;background-color: rgb(0 0 0);right: 10.2px;color: white;border-radius: 25px;/* width: 100%; */box-shadow: rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+        ">
+          <span id="account">Account</span><br>
+          <span id="btn_logout">Logout</span><br>
           <span id="btn_payment_plan" style="display: none;">Payment Plan</span>
-        <span id="btn_manage" style="color:white">Manage Subscription</span></div>`)
+        <span id="btn_manage">Manage Subscription</span></div>`)
+        
 
     $('#logout_div').css('display','none');
           
@@ -3879,7 +4497,7 @@ $('nav').eq(0).addClass('custom_nav');
 
               user_prompt_history = response.data.user_prompt_history;
               // sessionStorage.setItem('user_prompt_history', JSON.stringify(response.data.user_prompt_history));
-              appending_side_menu();
+             
 
 
 
@@ -3909,7 +4527,18 @@ $('nav').eq(0).addClass('custom_nav');
               global_api_response = response.data.public_prompts;
               user_prompts = response.data.user_prompts;
 
-              all_prompts = response.data.all_prompts;
+              all_prompts = ([...global_api_response,...user_prompts]);
+              let url = window.location.search;
+              if (url) {
+                let id=url.split('=')[1];
+                prompt_to_load=all_prompts.filter((item)=>item._id === id );
+                if(prompt_to_load.length){
+                  prompt_selected=prompt_to_load;
+                 
+                 
+                }
+
+              }
               sessionStorage.setItem('all_prompts', JSON.stringify(all_prompts));
 
               chrome.runtime.sendMessage({ type: "fetching_topics" }, function (response) {
@@ -3929,6 +4558,15 @@ $('nav').eq(0).addClass('custom_nav');
 
 
                     menu_items();
+                    appending_side_menu();
+                    let check = sessionStorage.getItem('isExtensionActive');
+                    if (check) {
+                      console.log(typeof (check));
+                      if (check === 'false') {
+                        isExtensionActive=false;
+                        return extension_disabled();
+                      }
+                    }
 
                   }
                 );
@@ -3997,7 +4635,7 @@ const update_prompt = () => {
     }, function (response) {
       console.log(response);
       if (response) {
-        chrome.runtime.sendMessage({ type: "fetch_prompts", id: userId, page }, function (response) {
+        chrome.runtime.sendMessage({ type: "fetch_prompts", id: userId, }, function (response) {
           
           global_api_response = response.data.public_prompts;
           user_prompts = response.data.user_prompts;
@@ -4086,6 +4724,9 @@ const blur_background=()=>{
   $('#publicbutton').prop('disabled',true);
   $('#main_screen_div').addClass('blur-effect');
   $('textarea').eq(0).parent().addClass('blur-effect');
+  if($('#main_pop_up').length){
+    $('#main_pop_up').remove();
+  }
   if ($('Pagination_div').length){
     $('#Pagination_div').remove();
   }
@@ -4106,8 +4747,7 @@ const closing_connect_open_ai_popup=()=>{
   $('#publicbutton').prop('disabled',false);
   $('#main_screen_div').removeClass('blur-effect');
   $('textarea').eq(0).parent().removeClass('blur-effect');
-  $('#connect_with_openai_div').remove();
-  $('#feature_div').remove();
+  $('#main_pop_up').remove();
   $('#publicbutton').click()
  
 

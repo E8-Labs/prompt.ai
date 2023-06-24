@@ -1,6 +1,8 @@
 const extension_disabled=()=>{
   
- 
+  // $(`${gpt_mode_selector_div} >div `).eq(0).css('background', '#d9d9e3');
+  // document.querySelectorAll(gpt_mode_selector)[0].style.cssText += 'background: #d9d9e3  !important';
+  // document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background: #d9d9e3 !important';
     
     clearInputs();
     $('#main_screen_div').hide();

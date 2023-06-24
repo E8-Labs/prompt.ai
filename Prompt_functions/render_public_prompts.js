@@ -1,6 +1,7 @@
 const render_public_prompts=()=>{
-
+    page=1;
     btn_click = 'Public';
+    
 
     if ($(".main_public_prompt_div").length > 0) {
         $(".main_public_prompt_div").remove();
@@ -211,7 +212,7 @@ const render_public_prompts=()=>{
 
         
         // $('#Pagination_div').css('padding-bottom','100px');
-        $('#Pagination_div').css('padding-bottom','15%');
+        $('#Pagination_div').css('padding-bottom','25%');
         
     }
 

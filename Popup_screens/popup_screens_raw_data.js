@@ -34,13 +34,8 @@ var popUp = `<div id="openPopUp" style="  height: 500px;
 
             </div>
             <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-            <div class="line-1 step_bar_single_completed"></div>
-            <div class="line-2 step_bar_single_uncompleted"></div>
-            <div class="line-3 step_bar_single_uncompleted"></div>
-            <div class="line-4 step_bar_single_uncompleted"></div>
-            <div class="line-5 step_bar_single_uncompleted"></div>
-            <div class="line-6 step_bar_single_uncompleted" ></div>
-            <div class="line-7 step_bar_single_uncompleted" ></div>
+            <div class="line-1 step_bar_single_completed" style="width:5%" ></div>
+            
             </div>
             <div id="pubpvt_tab" style="margin-left: 29%;padding-top: 20px;">
             <button id='public_btn' style="background: #474646;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Public</button>
@@ -48,14 +43,14 @@ var popUp = `<div id="openPopUp" style="  height: 500px;
             </div>
             <div id="new_prompt_title_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Title</span>
-            <input id='new_prompt_title'  type='text' maxlength='150'   style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" />
+            <input id='new_prompt_title'  type='text' maxlength='150'   style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" placeholder='Create Powerful Youtube Script in...'  />
             </div>
             <div style="display:flex;justify-content:flex-end"> <p id='max_title_char_length' style="color: white;
             font-size: 12px;
             margin-right: 20px;"> ${max_char_title}  characters  </p>    </div>
             <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-            <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Teaser</span>
-            <textarea  maxlength="250" placeholder='Description: What can users do with this' id='new_prompt_teaser' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;font-size: 12px;box-shadow: none;"></textarea>
+            <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Description</span>
+            <textarea  maxlength="250" id='new_prompt_teaser' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;font-size: 12px;box-shadow: none;" placeholder='Use this space to create an enticing description that draws users in understanding what your prompt does' ></textarea>
             </div>
             <div style="display:flex;justify-content:flex-end"> <p id='max_char_teaser_length' style="color: white;
             font-size: 12px;
@@ -104,19 +99,14 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
               
 
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed"></div>
-              <div class="line-2 step_bar_single_completed"></div>
-              <div class="line-3 step_bar_single_uncompleted"></div>
-              <div class="line-4 step_bar_single_uncompleted"></div>
-              <div class="line-5 step_bar_single_uncompleted"></div>
-              <div class="line-6 step_bar_single_uncompleted" ></div>
-              <div class="line-7 step_bar_single_uncompleted" ></div>
+              <div class="line-1 step_bar_single_completed" style="width:40px" ></div>
+              
               </div>
 
               
              <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
              <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Template</span>
-            <textarea placeholder='Prompt Text, including placeholders [TargetLanguage][Prompt],[Variable1],[Variable2] replaced automagically' id='new_prompt_template' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 175px;border: none;font-size: 12px;box-shadow: none;"></textarea>
+            <textarea placeholder='This is where the magic happens, Ensure your variables are in [Brackets] Eg:[Prompt],[Topic],[Subject] You can have more than one variable Eg: [Language], [Tone],[Age],[Height] Be detailed and specific; the more context you provide the better the result. For more help, click the link below.' id='new_prompt_template' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 175px;border: none;font-size: 12px;box-shadow: none;"></textarea>
            
             
               </div> 
@@ -182,24 +172,19 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed"></div>
-              <div class="line-2 step_bar_single_completed"></div>
-              <div class="line-3 step_bar_single_completed"></div>
-              <div class="line-4 step_bar_single_uncompleted"></div>
-              <div class="line-5 step_bar_single_uncompleted"></div>
-              <div class="line-6 step_bar_single_uncompleted" ></div>
-              <div class="line-7 step_bar_single_uncompleted" ></div>
+              <div class="line-1 step_bar_single_completed" style="width:25%" ></div>
+            
               </div>
 
               <div id="new_prompt_Hint_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
               <div> <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Hint</span> </div>
-              <div> <input id='new_prompt_Hint' type='text' style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" /> </div>
+              <div> <input id='new_prompt_Hint' type='text' placeholder='Ex: Makeup tutorial, Amazon FBA, etc'  style=" width:100%; background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" /> </div>
               </div>
               <div style="height: 70px;
               border: 2px solid #28a47a;
               margin-top: 30px;
               border-radius: 15px;">
-              <div>  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Main Topic</span> </div>
+              <div style="height:27px">  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Category</span> </div>
               <div> <select style="width: 360px;
                         border-radius: 15px;
                         background-color: black;
@@ -207,7 +192,7 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
                         font-size: 13px;
                         box-shadow:none;
                         margin-top: -9px;" name="select_topic" id="select_topic">
-              <option style="border:none" value='none'>Select a Category</option>
+              <option style="border:none" value='none'>Select </option>
               </select>
               </div>
 
@@ -217,14 +202,14 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
                 border: 2px solid #28a47a;
                 margin-top: 30px;
                 border-radius: 15px;">
-               <div>  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Sub Topic</span> </div>
+               <div>  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Topic</span> </div>
               <div> <select style="width: 100%;
                             box-shadow:none;
                             border-radius: 15px;
                             background-color: black;
                             border: none;
                             font-size: 13px;" name="select_subtopic" id="select_subtopic">
-              <option style="border:none" value='none'>Select a subtopic</option>
+              <option style="border:none" value='none'>Select </option>
              
               </select>
               </div>
@@ -471,17 +456,11 @@ var popUp6 = `<div id="openPopUp" style="  height: 500px;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed"></div>
-              <div class="line-2 step_bar_single_completed"></div>
-              <div class="line-3 step_bar_single_completed"></div>
-              <div class="line-4 step_bar_single_completed"></div>
-              <div class="line-5 step_bar_single_completed"></div>
-              <div class="line-6 step_bar_single_completed" ></div>
-              <div class="line-7 step_bar_single_uncompleted" ></div>
-              <div class="line-8 step_bar_single_completed" style="float:none;"></div>
+              <div class="line-1 step_bar_single_completed" style="width:40%"></div>
+              
               </div>
 
-              <div style="display:flex;justify-content:center">
+              <div style="margin-left:149px">
               <h5 style="color:white;margin-top: 20px;margin-left: -25px;"> Enrich with Data  </h5>
               </div>
 
@@ -613,14 +592,8 @@ var popUp7 = `<div id="openPopUp" style="  height: 500px;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed"></div>
-              <div class="line-2 step_bar_single_completed"></div>
-              <div class="line-3 step_bar_single_completed"></div>
-              <div class="line-4 step_bar_single_completed"></div>
-              <div class="line-5 step_bar_single_completed"></div>
-              <div class="line-6 step_bar_single_completed" ></div>
-              <div class="line-7 step_bar_single_completed" ></div>
-              <div class="line-8 step_bar_single_completed" style="float:none"></div>
+              <div class="line-1 step_bar_single_completed" style="width:52%" ></div>
+            
               </div>
 
 
@@ -835,14 +808,9 @@ var suggestionPopUp = `<div id="openPopUp" style="  position: fixed;
               </div>
               </div>`;
 
-var feature_popup = ` <div id='feature_div' style="width: 401px;
-                          height: 464px;
-                          position: fixed;
-                          left: 36%;
-                          top: 20%;
-                          background: #050A08;
-                          box-shadow: rgba(40, 164, 122, 0.467) 1px 0px 3px 3px
-                          " > 
+var feature_popup = ` <div id='feature_div' style="background: #050A08;
+                                                 ;
+                                                   width: 62%;" > 
 
              <div style="padding:5%" > <h3 style="color:white"> Prompt. </h3>  </div>             
               

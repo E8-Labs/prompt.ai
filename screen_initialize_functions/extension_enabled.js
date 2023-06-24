@@ -1,7 +1,7 @@
 const extension_enabled=()=>{
    
     clearInputs();
-   
+    // $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
     $('#main_screen_div').show();
     $('textarea').eq(0).parent()
         .prepend(lang_wrapper);

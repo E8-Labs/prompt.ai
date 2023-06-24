@@ -13,7 +13,14 @@ const menu_items=()=>{
                                       position: relative;
                                       ">
                                     <div style="display: flex;width: 700px;">
-                                    <div style="display:flex;align-items:center" id='publicbutton' > <div> <img src="${star}" alt="vCZC4.png" border="0" /> </div>  <div >  &nbsp <span style="color:white;margin-left:5px">   All </span> </div> </div>
+                                    <div style="    display: flex;
+                                                    align-items: center;
+                                                    cursor: pointer;
+                                                    background: rgba(255, 200, 5, 0.1);
+                                                    width: 68px;
+                                                    height: 31px;
+                                                    padding-left: 1%;
+                                                    border-radius: 10px;" id='publicbutton' > <div> <img src="${star_2}" alt="vCZC4.png" border="0" /> </div>  <div >  &nbsp <span style="color:white;margin-left:5px">   All </span> </div> </div>
                             
                             
                             
@@ -26,9 +33,9 @@ const menu_items=()=>{
                                     <div style="margin-left: 75px;display:flex;align-items:center" id='ownbutton' > <div><img src="${created}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Created </span> </div></div>
                                     </div>
                                     <div style="    position: relative;
-
+                                                    margin-top:1%;
                                                     right: 5%;">
-                                        <button id='promptbtn' class='create_new_prompt_btn' style="background-color: #00c08b;height: 40px;width: 150px;border-radius: 11px;padding-left: 10px;color: white;padding: 5px;">
+                                        <button id='promptbtn' class='create_new_prompt_btn' style="background-color: #00c08b;height: 54px;width: 153px;border-radius: 20px;padding-left: 10px;color: white;padding: 5px;">
                                             <div id='prompt' style="padding-right:20px">
                                                 <svg id='mysvg' stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="float: left;
             margin-left: 10px;
@@ -212,8 +219,18 @@ const menu_items=()=>{
         // $(main_screen_selector).eq(0).css('background', 'black');
       
         $('#top_bar').after(main_div);
+        if(prompt_to_load.length){
+            $('#ownbutton').click();
+            // $(`#${prompt_to_load[0]._id}`).click();
+            document.getElementById(`${prompt_to_load[0]._id}`).children[1].click()
+            // console.log(`#${prompt_to_load[0]._id}`.eq(0));   
+
         
-        render_public_prompts();
+        }
+        else{
+            render_public_prompts();
+        }
+       
 
 
 

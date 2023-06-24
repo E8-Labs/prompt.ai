@@ -210,7 +210,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           {
             method: "POST",
             body: JSON.stringify({
-              body: { type: "inserting_user", username:request.username,email:request.email, image:request.image },
+              body: { type: "inserting_user", username:request.username,email:request.email, image:request.image, },
             }),
             headers: {
               "Content-Type": "application/json;",
@@ -752,6 +752,52 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
       method: 'POST',
       body: JSON.stringify({ "body": { type: "fetching_template_content", id: request.id } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "inserting_username") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "inserting_username", email: request.email, new_username: request.new_username, user_photo: request.user_photo, password: request.password } }),
+      headers: {
+        "Content-Type": "application/json;"
+      }
+    });
+
+    fetch(req)
+      .then(function (response) {
+        return response.json();
+      }).then(function (jsonData) {
+        var obj = jsonData;
+        var resp = JSON.parse(obj.body)
+        sendResponse({ status: 200, data: resp });
+      }).catch(function (err) {
+        console.log("Opps, Something went wrong!", err);
+        sendResponse({ status: 400 });
+      });
+
+  }
+
+  if (request.type == "inserting_a_subscriber") {
+    var req = new Request('https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/', {
+      method: 'POST',
+      body: JSON.stringify({ "body": { type: "inserting_a_subscriber", uId: request.userId, sId: request.sId, } }),
       headers: {
         "Content-Type": "application/json;"
       }
