@@ -1,7 +1,7 @@
 var template_content;
 var csv_file_content;
-var child_prompt_1;
-var child_prompt_2;
+var child_prompt_1=[]
+var child_prompt_2=[]
 var user = false;
 var count = 0;
 var file_content;
@@ -25,7 +25,7 @@ var hint;
 var topic;
 var tone;
 
-var extra_parent_prompts;
+var extra_parent_prompts=[];
 var childPrompt;
 var maxlength = 10;
 var chat_bot_response = '';

@@ -12,3 +12,4 @@ var gpt_mode_selector_div;
 var paid_version_starting_elements_div;
 var gpt_new_chat;
 var hide_nav_menu_button;
+var entire_screen_black;

@@ -25,7 +25,7 @@ const appending_side_menu = () => {
         if ($('#upper_side_menu_content').length) {
             $('#upper_side_menu_content').remove();
         }
-        $('nav').eq(0).prepend(`<div id='upper_side_menu_content' style="padding-top: 9%;"  >  </div>`)
+        $('nav').eq(0).prepend(`<div id='upper_side_menu_content' style=""  >  </div>`)
 
         $('nav').parent().addClass('change_background_color_of_all_children');
 
@@ -35,12 +35,30 @@ const appending_side_menu = () => {
 
         if ($('.prompt_ai_logo').length) {
             $('.prompt_ai_logo').remove();
+
         }
-        $('#upper_side_menu_content').append(`<div class='prompt_ai_logo' style="position: absolute;
-          top: 30px;
-          left: 75px;
+
+    
+
+
+
+        $('#navbar_items').prepend(`<div class='prompt_ai_logo' style="margin-left:4%;
+         
+          height:40px;
+         
           display:flex" > 
-          <h4 style="color:white;font-size:15px" > Prompt. </h4> <h4 style="color:#00b985;font-size:15px"> ai  </h4>  </div>`)
+            <img src='${updated_prompt_savy_logo}'   />     </div>`)
+
+            if($('#profile_div').length){
+                $('#profile_div').remove();
+            }
+    $('#navbar_items').append(`<div id='profile_div' style="display:flex" >
+                           <div style="padding-top:10px;margin-left: 40px;z-index:100000">  <img id='search_icon' src='${search_icon}' style="cursor:pointer" />  </div>
+              <div style="    margin-right: 60px;padding-top:10px;margin-left: 40px;"> <b> <svg style="border-color:#39b291;color:#39b291" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+              </svg> </b>  </div> <div style="position: relative;" >  <img id='profile_icon' style="border-radius:50%" src=${userInfo.image ? userInfo.image : image } height='50px' width='40px' alt='Image to be shown' /> </div></div> 
+               </div>
+               </div>`)
         if ($('.sidebar_top_links').length) {
             $('.sidebar_top_links').remove();
         }
@@ -51,17 +69,7 @@ const appending_side_menu = () => {
         if ($('#spacing').length) {
             $('#spacing').remove();
         }
-        $('#upper_side_menu_content').append(` <div style="padding-top:17%"> <div class='sidebar_top_links' id='Dashboard_side_menu' > 
-             <div style="margin-left:15px"> <svg style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
-             <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
-             </svg>  </div>  <div style="margin-left:5px"> <h5 style="color:white"> Dashboard </h5> </div>  
-             </div>
-
-             <div class='sidebar_top_links' id='Prompts_side_menu' > 
-             <div style="margin-left:15px"> <img src="${chatgpt}" alt="vCZC4.png" border="0"  />  </div>  <div style="margin-left:5px"> <h5 style="color:white"> Chat GPT </h5> </div>
-             </div>
-    
-            </div> `)
+      
 
         if ($('#new_chat_div').length) {
             $('#new_chat_div').remove();
@@ -69,7 +77,7 @@ const appending_side_menu = () => {
 
 
 
-        $('#Prompts_side_menu').after(`<div id='new_chat_div' style="border: 1px solid white;
+    $('#upper_side_menu_content').append(`<div id='new_chat_div' style="border: 1px solid white;
                                                                       display: flex;
                                                                       margin-left: 63px;
                                                                       margin-top: 20px;
@@ -128,24 +136,14 @@ const appending_side_menu = () => {
 
 
 
-             <div class='sidebar_bottom_links' id='Privacy_policy_side_menu'  style="height: 25px"> 
-             <div style="margin-left:15px"> <svg style="color:white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
-                   <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                   <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                   </svg>  </div>  <div style="margin-left:5px"> <h5 style="color:white"> Privacy Policy </h5> </div>
-             </div>
+           
 
 
 
-             <div class='sidebar_bottom_links' id='Terms_conditions_side_menu'  style="height: 25px"> 
-             <div style="margin-left:15px" > <svg style="color:white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
-                   <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
-                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                   </svg> </div>  <div style="margin-left:5px"> <h5 style="color:white"> Terms and Conditions </h5> </div>
-             </div>
+          
 
               <div class='sidebar_bottom_links' id='Extension_status'  style="height: 50px"> 
-             <div style="margin-left:15px" > <img src='${extension_logo}'  alt='extension_status' /> </div>  <div style="margin-left:5px"> <h5 style="color:white"> Extension Enabled </h5> </div>
+             <div style="margin-left:15px" > <img src='${extension_logo}'  alt='extension_status' /> </div>  <div style="margin-left:5px"> <h5 id='extension_status_text' style="color:white">Disable Extension</h5> </div>
              <div id='toggle_extension_state_active' style="margin-left:5px" > <svg style="color:#00C28C;cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
              <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
             </svg> </div>

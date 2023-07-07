@@ -18,15 +18,20 @@ const create_a_prompt=()=>{
                                 type: "creating_prompt", template, teaser, price, dataset_name, hint, title, author: author ? author : undefined, url, topic, tone, subtopic, checkUser: 'true', file_content,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
-
+                                
+                                if(response.data.title){
+                                    child_prompts_information.push(response.data.title);
+                                }
+                                
                                 if (response.data) {
+                                    
                                     isSequential = false;
                                     pID = null;
                                     template = "";
                                     hint = "";
 
                                     url = "";
-                                    teaser = "";
+                                    
                                     title = "";
                                     PD = response.data.pID;
                                     count++;
@@ -38,6 +43,8 @@ const create_a_prompt=()=>{
 
                                     setTimeout(() => {
                                         $("body").append(popUp);
+                                        $('#new_prompt_teaser').prop('placeholder', teaser);
+                                        $('#new_prompt_teaser').prop('disabled',true);
                                     }, 550);
                                 }
 
@@ -57,6 +64,9 @@ const create_a_prompt=()=>{
                 user: userId, sequential: 'true', teaser
             }, function (response) {
                 console.log(response);
+                if (response.data.title) {
+                    child_prompts_information.push(response.data.title);
+                }
 
                 isSequential = false;
                 pID = null;
@@ -65,7 +75,7 @@ const create_a_prompt=()=>{
 
 
                 url = "";
-                teaser = "";
+                
                 title = "";
                 PD = response.data.pID;
                 count++;
@@ -77,6 +87,8 @@ const create_a_prompt=()=>{
 
                 setTimeout(() => {
                     $("body").append(popUp);
+                    $('#new_prompt_teaser').prop('placeholder',teaser);
+                    $('#new_prompt_teaser').prop('disabled', true);
                 }, 550);
 
             });
@@ -106,8 +118,15 @@ const create_a_prompt=()=>{
                                 type: "creating_prompt", template, dataset_name, price, teaser, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'true', file_content,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
-
+                                console.log(response);
+                                  
+                                if (response.data.title) {
+                                    child_prompts_information.push(response.data.title);
+                                }
                                 if (response.data) {
+                                    
+                                    
+                                    
                                     isSequential = false;
                                     pID = null;
                                     template = "";
@@ -185,15 +204,19 @@ const create_a_prompt=()=>{
                                 type: "creating_prompt", template, dataset_name, teaser, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content, public,
                                 user: userId, sequential: 'true', pID: pID !== null ? pID + 1 : "",
                             }, function (response) {
-
+                                if (response.data.title) {
+                                    child_prompts_information.push(response.data.title);
+                                }
+                                console.log(response);
                                 if (response.data) {
+                                    
                                     isSequential = false;
                                     pID = null;
                                     template = "";
                                     hint = "";
 
                                     url = "";
-                                    teaser = "";
+                                    
                                     title = "";
                                     PD = response.data.pID;
                                     count++;
@@ -205,6 +228,8 @@ const create_a_prompt=()=>{
 
                                     setTimeout(() => {
                                         $("body").append(popUp);
+                                        $('#new_prompt_teaser').prop('placeholder', teaser);
+                                        $('#new_prompt_teaser').prop('disabled', true);
                                     }, 550);
 
 
@@ -234,16 +259,19 @@ const create_a_prompt=()=>{
                 type: "creating_prompt", template, teaser, dataset_name, price, hint, title, author: author ? author : undefined, url, topic, subtopic, tone, checkUser: 'false', file_content,
                 user: userId, sequential: 'true', teaser,
             }, function (response) {
-                console.log(response);
+                if (response.data.title) {
+                    child_prompts_information.push(response.data.title);
+                }
                 if (response) {
-
+                    console.log(response);
+                    
                     isSequential = false;
                     pID = null;
                     template = "";
                     hint = "";
 
                     url = "";
-                    teaser = "";
+                    
                     title = "";
                     PD = response.data.pID;
                     count++;
@@ -255,6 +283,8 @@ const create_a_prompt=()=>{
 
                     setTimeout(() => {
                         $("body").append(popUp);
+                        $('#new_prompt_teaser').prop('placeholder', teaser);
+                        $('#new_prompt_teaser').prop('disabled', true);
                     }, 550);
 
                 }

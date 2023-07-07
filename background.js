@@ -439,13 +439,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       }
 
 
-      if (request.type == "inserting_category_and_subcategory") {
+  if (request.type == "suggesting_category_and_subcategory") {
         var req = new Request(
           "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
           {
             method: "POST",
             body: JSON.stringify({
-              body: { type: "inserting_category_and_subcategory", category_name:request.topic_name,subcategory_name:request.subtopic_name },
+              body: { type: "suggesting_category_and_subcategory", category_name:request.topic_name,subcategory_name:request.subtopic_name },
             }),
             headers: {
               "Content-Type": "application/json;",

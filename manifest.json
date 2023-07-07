@@ -18,7 +18,7 @@
       ],
       "js": [
         "jquery.js",
-
+           "jquery_select.js",
         "popper.js",
         "bootstrap.js",
         "./Prompt_functions/render_public_prompts.js",

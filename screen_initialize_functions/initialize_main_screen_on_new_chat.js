@@ -3,40 +3,96 @@ const initialize_main_screen_on_new_chat=()=>{
         $('#main_screen_div').remove();
     }
     
-    $('main').eq(0).prepend(`<div style="position:absolute;width:100%;height:100%;z-index:999;background-color:black;overflow-y:auto" id='main_screen_div' >  </div> `)
+    $('main').eq(0).prepend(`<div style=" position:absolute; width:100%;height:100%;z-index:999;background-color:black;overflow:scroll" id='main_screen_div' >  </div> `)
+    $('#main_screen_div').append(`<button id='searchbtn' style="visibility:hidden;position:absolute;top:0px"  > </button>
+    <div id="loading_gif_2" style="display:none; z-index: 10000000">
+                <img style="height: 60px;
+                            position: fixed;
+                            top: 45%;
+                            left: 47%;" id="loading-image" src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif" alt="Loading..." />
+              </div>
+    `)
+   
 
-    $('#main_screen_div').eq(0).append(
-        `<div id='top_bar' style="width:100%;margin-left: 0%;"><div id='menu'  style="width:100%;display:flex;align-items:start;margin-top:15px; justify-content:space-between;padding-inline:1%" >  <div class="input-group" style="display:flex;justify-content:center;width:700px"> <input type='text' id='searchbar' style="      border-color: #39b291;
-            border-radius: 15px;
-            width: 700px;
-            display:none;
+    $('#main_screen_div').on('scroll', function () {
+        var scrollPosition = $('#main_screen_div').scrollTop();
+        if (scrollPosition >= 45) {
+            $('#navbar_elements_div').css('visibility', 'visible');
+            $('#main_menu_items').hide();
+        }
+        else if (scrollPosition <= 10) {
+            $('#navbar_elements_div').css('visibility', 'hidden');
+            setTimeout(() => {
+                $('#main_menu_items').show();
+            }, 100)
+        }
+    })
+
+    if ($('#navbar_items').length) {
+        $('#navbar_items').remove();
+    }
+
+
+    $('body').prepend(`<div id='navbar_items' style="display: flex;
+                                          justify-content:space-between;
+                                          margin-right:5%;
+                                          margin-top:1%;
+                                          height:55px;
+                         ">
+
+                         <div id='navbar_elements_div' style="display: flex;width: 700px;margin-left:2%;visibility:hidden;">
+                                    <div style="    display: flex;
+                                                    align-items: center;
+                                                    cursor: pointer;
+                                                    background: rgba(255, 200, 5, 0.1);
+                                                    width: 68px;
+                                                    transition:0.3s;
+                                                    height: 40px;
+                                                    padding-left: 1%;
+                                                    border-radius: 10px;" id="publicbutton"> <div> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHKSURBVHgBnVTLTcNAEH0z+VwA4xNnUwGhg1BCFHHgBhWQDggVBCqIb0iEXwe4A0IH6QAUQAoO8TC79pqfQUuetNrVzM7zm9nxAB6QYRia5XOX/iQ6X2mhzgMItfPbkuB1fkB7s8m/CeUsjNDM7vT4qOu0MB/qCpGm27+R1n8jVLIjG8wa3MmD5Tq8QaYfaTR7wKwHX8hotS2Xgcjl2vCH7yKI1fegvv2q2DJluQ6OkGHfqjJLMEYt7Th1H/f0cTJbigimHIIJaoipMz0tCZVsoGQ9iBad9ALonrrTE/yVhVEo1NLTFsg8msTUfTr4lF7Qx5KQUdC3HMrFALet1O60j2VR5yIbVkK2bQHfxq3EDGUsa4HH9hQsBlgCVkjeYqo0jXOjq8HV2i3+CY0bVr6BGnqusN5k7kFHQdnkXHqZ4+LQgje4bbdnF/uZcD6Pcos8wluiTOy+MVtHhcLI7ovaGL5o1BK7vzR2fhJKoYwX0fc4M8Yqa5stchsVSvFtfMlVcKf/pvaUHIPnCbKGBpBpJ9dnk9L3Vo80Kzs89KfYdBxfxxdxB5Jp69AQWdMpT+DmIRnywsfFBzjd+UKBCtj0hCKTCu0+J74+g3dStdXUpfas/wAAAABJRU5ErkJggg==" alt="vCZC4.png" border="0"> </div>  <div>  &nbsp; <span style="color:white;margin-left:5px">   All </span> </div> </div>
+                            
+                            
+                            
+                                    <div style="    margin-left: 45px;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    cursor: pointer;
+                                                    border-radius: 10px;
+                                                    height:40px;
+                                                    transition:0.3s;
+                                                    width: 94px;" id="Favourite"> <div style="margin-left:11%"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAYAAABrXO8xAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEqSURBVHgB7VPbTcNQDD3XqfoDre4I7QbpBs0G2aDqLyqPDWCDVHwgftkAJoAN6Aa9TECEhBS1IeY4alBUVVD6XUtOfB0f29E9x2HL/JX6ooBv54p7F7brXBOcnGksETLnMMYOU8XLeo1p00Ts0ZtpGnXwyjBUFZLVCsO2W44N37pdLE9nOv6Z2L/UJRQPH7fuBr9Y/0LnfE1EMBSbRpD/C1SvJ6hryhKxcIUB5wbsYfnc5azPxRFIkNcKOfY0/m8wjOBAOwIPARrZzf8FJLWueV/v5hbvqumQ9YFsmDRTKkVGCqYbYg/oWe9c4yjCdMMcX2NMTqYMHh6dICYIVETSyIfNBmz2bHnWLAhMTTHyeecWXyVGrMlNISTyqC1cTgnkZsLwyY62iX3/BoOGhsA8hmO+AAAAAElFTkSuQmCC" alt="vCZC4.png" border="0"> </div>  <div>  &nbsp; <span style="color:white;margin-left:5px">   Saved </span> </div> </div>
+                            
+                            
+                                   
+                            
+                            
+                                    <div style="width: 109px; border-radius: 10px; transition: all 0.3s ease 0s; height: 40px; margin-left: 45px; display: flex; align-items: center; cursor: pointer;" id="ownbutton"> <div style="margin-left:8%"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGPSURBVHgBrVTLUcNADNXay5ADJFsB41QAJTgVQAlQAaSCtAAVQAl0kFABdBAnKSA7cAnY8fKef+PZsUMO6JCVlNWT9LSyEk+MW5odDi06kg5xouyJpIlVY9v2qxZAtJfwGY5YjhAnskhlf7dT46QBIkgu4ZwqrjyVp7qHPs0l//AyGyVBDO2a9o/sJzWYnLv1fOjWywEAaQ/d6gG2q+0uYXLc2TK2dhgGIfixdWHZXDggjGEsMYJUJCrduR26zQwtvtNi/38BuartnZyOtBJtCuoknPH0SaScuU2cSZa0fSWQThR/5XusW+5pIPmLP1ZKKA7TDBd4Fr1VNkCczmcHyLGi+/5gOwEqKWoFjxj7DYiNYVlUPvEr1/0ZsgQPdEGdIDgs+YO+6mq/F8iWxBacjFBJDpAvddHLUcDMZdYw6ruEWVpMZ+X74TNVNZYV2cp51Zutg5MqJq62LCkc1YpsD62EL/4G+EtLeQWpb/xcdAGgCk7wEuotu6mX9n8/I17JJi3fjekCyMDHAJX4nP0Ci97cAJTn0NEAAAAASUVORK5CYII=" alt="vCZC4.png" border="0"> </div>  <div>  &nbsp; <span style="color:white;margin-left:5px">   Created </span> </div></div>
+                                    </div>
+
+                         
+          </div>`)
+
+
+    $('#navbar_items').append(`<input type='text' id='searchbar' style="   border: 1px solid #FFFFFF;
+            border-radius: 44px;
+            box-shadow:none;
+            visibility:hidden;
+            width:0px;
+            position:absolute;
+            right:15%;
             background-color: black;
             color: white;
-            height: 60px;" placeholder='Search Prompt' /> <div class="input-group-append" style="    position: absolute;
-            margin-left: 650px;
-            margin-top: 22px;" > <button type="button" id='search_button'  style="display:none" >  <svg id='searchbtn' style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg> </button> </div> </div> 
-              <div style="display: flex;
-                          position: relative;
-                          right: 45px;
-                          top: 10px;;">
-                          <div style="padding-top:10px;margin-left: 40px;">  <img id='search_icon' src='${search_icon}' style="cursor:pointer" />  </div>
-              <div style="    margin-right: 60px;padding-top:10px;margin-left: 40px;"> <b> <svg style="border-color:#39b291;color:#39b291" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-              </svg> </b>  </div> <div style="position: relative;" >  <img  id='profile_icon' style="border-radius:50%" src=${image} height='50px' width='40px' alt='Image to be shown' /> </div></div> 
-               </div>
-          </div>
-          <div id="loading_gif_2" style="display:none; z-index: 10000000">
-                <img style="height: 60px;position: fixed;top: 45%;left: 60%;" id="loading-image" src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif" alt="Loading..." />
-              </div>
-          `
-    );
+            top:1%;
+            font-size:13px;
+            font-weight:500;
+
+            height: 55px;" placeholder='Search Prompt' />
+             `)
 
     if (is_premium === true) {
-        $('#top_bar').append(`     <div class="switches-container" style=" position: absolute;
-                                                              left: 47%;
-                                                              top: 4%;" >
+        $('#navbar_items').append(`     <div class="switches-container" style="position: absolute;
+                                                                                left: 52%;
+                                                                                top: 2%;" >
                                     <input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked">
                                     <input type="radio" id="switchYearly" name="switchPlan" value="Yearly">
                                     <label id='gpt_3_button' for="switchMonthly">GPT-3.5</label>
@@ -75,14 +131,19 @@ const initialize_main_screen_on_new_chat=()=>{
     // }
 
 
+    if ($('#logout_div').length){
+        $('#logout_div').remove();
+    }
 
-    $('#main_screen_div').append(`<div id="logout_div" style="    position: absolute;z-index: 10;top: 66px;cursor: pointer;float: right;width: max-content;box-shadow: rgba(, 99, 99, 0.2) 0px 2px 8px 0px;font-size: 15px;padding: 10px;background-color: rgb(0 0 0);right: 10.2px;color: white;border-radius: 25px;/* width: 100%; */box-shadow: rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
+    $('#navbar_items').append(`<div id="logout_div" style="    position: absolute;z-index: 10;top: 66px;cursor: pointer;float: right;width: max-content;box-shadow: rgba(, 99, 99, 0.2) 0px 2px 8px 0px;font-size: 15px;padding: 10px;background-color: rgb(0 0 0);right: 20.5px;color: white;border-radius: 25px;/* width: 100%; */box-shadow: rgba(40, 164, 122, 0.467) 1px 0px 3px 3px;
         ">
           <span id="account">Account</span><br>
           <span id="btn_logout">Logout</span><br>
           <span id="btn_payment_plan" style="display: none;">Payment Plan</span>
         <span id="btn_manage">Manage Subscription</span></div>`)
 
+
+  
     $('#logout_div').css('display', 'none');
     $('#top_bar').before(`<a style="color:white;display:none" id='navigating_to_top' href='#'> Navigate to me </a>`)
     appending_side_menu();

@@ -2,19 +2,26 @@ const main_screen_for_user_not_logged_in=()=>{
     if ($('#main_screen_div').length) {
         $('#main_screen_div').remove();
     }
+
+    $('.scrollbar-trigger').parent().css('height','100%');
+    $('form').parent().css('padding-bottom', '');
+    
     $('main').eq(0).prepend(`<div style="position:absolute;width:100%;height:100%;z-index:999;background-color:black;overflow-y:auto" id='main_screen_div' >  </div> `);
+    $('#main_screen_div').append(`<button id='searchbtn' style="visibility:hidden;position:absolute;top:0px"  > </button>`)
     $('#main_screen_div').eq(0).append(
-        `<div id='top_bar' style="width:100%;margin-left: 0%;"><div id='menu'  style="width:100%;display:flex;align-items:start;margin-top:15px; justify-content:space-between;padding-inline:1%" >  <div class="input-group" style="display:flex;justify-content:center;width:700px"> <input type='text' id='searchbar' style="      border-color: #39b291;
-            border-radius: 15px;
-            width: 700px;
-            display:none;
+        `<div id='top_bar' style="width:99%;margin-left: 0%;"><div id='menu'  style="width:100%;display:flex;align-items:start;margin-top:15px; justify-content:flex-end;padding-inline:1%" >   <input type='text' id='searchbar' style=" border: 1px solid #FFFFFF;
+            border-radius: 44px;
+            font-weight:500;
+            font-size:13px;
+            box-shadow:none;
+            transition:0.05s;
+            visibility:hidden;
+            width:0px;
+            position:absolute;
+            right:132px;
             background-color: black;
             color: white;
-            height: 60px;" placeholder='Search Prompt' /> <div class="input-group-append" style="    position: absolute;
-            margin-left: 650px;
-            margin-top: 22px;" > <button id='search_button' type="button" style="display:none;"  >  <svg id='searchbtn' style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg> </button> </div> </div> 
+            height: 60px;" placeholder='Search Prompt' /> 
               <div  style="display: flex;
                                    position: relative;
                                    right: 12%;
@@ -34,9 +41,12 @@ const main_screen_for_user_not_logged_in=()=>{
                 `
     );
 
+   
+          
+          
     if (is_premium === true) {
         $('#top_bar').append(`     <div class="switches-container" style=" position: absolute;
-                                                              left: 58%;
+                                                              left: 40%;
                                                               top: 4%;" >
                                     <input type="radio" id="switchMonthly" name="switchPlan" value="Monthly" checked="checked">
                                     <input type="radio" id="switchYearly" name="switchPlan" value="Yearly">
@@ -69,7 +79,7 @@ const main_screen_for_user_not_logged_in=()=>{
                                                             display: flex;
                                                             justify-content: flex-end;
                                                             align-items:center;
-                                                            position: absolute;"> <img style="padding-right:1.5%" id='search_icon' src='${search_icon}' style="cursor:pointer" />   <button class="btn btn-info" style="    height: 30px;
+                                                            position: absolute;"> <img style="padding-right:1.5%;cursor:pointer" id='search_icon' src='${search_icon}'  />   <button class="btn btn-info" style="    height: 30px;
                                                                                               
                                                                                               background-color: #00c08b;
                                                                                              top: -5px;
@@ -77,7 +87,7 @@ const main_screen_for_user_not_logged_in=()=>{
                                                                                               left: 50px;top: 20px;" id='connect' type="button" class=""  > Connect with Openai  </button>  </div>`)
 
     $('#top_bar').before(`<a style="color:white;display:none" id='navigating_to_top' href='#'> Navigate to me </a>`)
-    $("#menu").after(`<div id='menu-items' style="display:flex;justify-content:space-between;align-items:center;width:100%;margin-left:20px">
+    $("#menu").after(`<div id='menu-items' style="display:flex;justify-content:space-between;align-items:center;width:97%;margin-left:20px">
                                       <div style="
                                       display: flex;
                                       left: 3%;
@@ -103,7 +113,7 @@ const main_screen_for_user_not_logged_in=()=>{
                                     <div style="margin-left: 75px;display:flex;align-items:center" id='Favourite' > <div><img src="${saved}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Saved </span> </div> </div>
                             
                             
-                                    <div style="margin-left: 75px;display:flex;align-items:center" id="Purchase" > <div > <img src="${purchased}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Purchased </span> </div> </div>
+                                    
                             
                             
                                     <div style="margin-left: 75px;display:flex;align-items:center" id='ownbutton' > <div><img src="${created}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Created </span> </div></div>
@@ -127,7 +137,16 @@ const main_screen_for_user_not_logged_in=()=>{
         $(document).off("click", ".upvote");
         $(document).off("click", ".downvote");
         $(document).off("click", ".heart");
-        
+        if($('.prompt_ai_logo').length){
+            $('.prompt_ai_logo').remove();
+        }
+        $('#upper_side_menu_content').css('padding-top', '16%');
+        $('#upper_side_menu_content').append(`<div class='prompt_ai_logo' style="position: absolute;
+          top: 18px;
+          height:40px;
+          left: 24%;
+          display:flex" > 
+            <img src='${updated_prompt_savy_logo}'   />     </div>`)
         
         var main_div = `<div id='main_div' class='row container' style="width: 100%;
                                                     margin-top: 15px;
@@ -136,6 +155,9 @@ const main_screen_for_user_not_logged_in=()=>{
 
         $('#top_bar').after(main_div);
         render_public_prompts();
+        $('.heart').prop('disabled',true);
+        $('.heart').removeClass('save_btn_active');
+        $('.heart').removeClass('save_btn');
      
 
 
@@ -143,6 +165,7 @@ const main_screen_for_user_not_logged_in=()=>{
     //    if(isRegistered===true){
        if(userInfo){
         if(userInfo.username){
+            console.log('yeah');
             $('#connect').attr('id','sign_in');
         }
             
@@ -164,6 +187,8 @@ const main_screen_for_user_not_logged_in=()=>{
        
 
     });
+
+
 
 
 }

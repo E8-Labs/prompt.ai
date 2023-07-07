@@ -6,7 +6,7 @@
     filter: blur(5px);
 }
 
-.hidediv {
+/* .hidediv {
     border-color:#d9d9e3;
     
     padding: 10px;
@@ -19,7 +19,7 @@
 .hidediv:hover{
     cursor:pointer;
     
-}
+} */
 
 .focussed:focus{
     border: 2px solid #28a47a
@@ -39,9 +39,7 @@ active{
 #new_topic_suggestion:hover{
     cursor:pointer
 }
-.create_new_prompt_btn:hover{
-    border :1px solid #999
-}
+
 /* .prompt_ai_logo:hover{
     cursor:pointer
 } */
@@ -82,12 +80,25 @@ active{
     background: black !important;
 }
 
-@media screen and ( min-width : 2732px ) {
+
+/* @media screen and ( min-width : 2732px ) {
     .text_area_to_center{
        margin-left:60% !important
     }
     
 }
+@media screen and (max-width : 1520px) {
+    .text_area_to_center {
+        margin-left: 28% !important
+    }
+
+}
+@media screen and (max-width : 1093px) {
+    .text_area_to_center {
+        margin-left: 11% !important
+    }
+
+} */
 
 /* @media screen and (max-width:1366px){
     #upper_side_menu_content{
@@ -349,4 +360,313 @@ active{
 /* toggle the switch box labels - second checkbox:checked - show second switch div */
 .switches-container input:nth-of-type(2):checked~.switch-wrapper .switch div:nth-of-type(2) {
     opacity: 1;
+}
+
+
+.prompt-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 35px;
+    padding: 22px;
+    margin-bottom: 20px;
+    transition: .3s;
+}
+
+.prompt-card:hover {
+    background: rgba(0, 194, 140, 0.1);
+}
+.prompt-user{
+    display:flex;
+    align-items: center;
+    color: #FFFFFF
+}
+
+.prompt-user a img {
+    width: 30px;
+    border-radius: 100%;
+}
+
+.prompt-user a {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF
+}
+
+.prompt-user-text {
+    padding-left: 15px;
+}
+
+.prompt-user-text h4 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    margin: 0;
+    margin-bottom: 3px;
+}
+
+.prompt-user-text p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FFFFFF;
+    opacity: 0.5;
+    margin: 0;
+    letter-spacing: .3px;
+}
+
+.prompt-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.save_toggle button {
+    display: inline-block;
+    transition: .3s;
+    color: #fff;
+    border: none;
+    background: transparent;
+    width: 26px;
+    height: 26px;
+    border-radius: 5px;
+    line-height: 22px;
+}
+
+.save_btn img {
+    width: 12px;
+    position: relative;
+    top: -1px;
+}
+
+.save_toggle button.active {
+    background: #00C28C;
+}
+
+.save_btn:hover {
+    background: #00C28C !important;
+}
+
+.save_btn_active{
+    background: #00C28C !important;
+}
+
+.prompt-content h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #00C28C;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.prompt-content p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.prompt-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prompt--description {
+    height: 180px;
+    padding-top: 35px;
+}
+
+.prompt-card-bottom a {
+    display: inline-flex;
+    padding: 10px 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    transition: .2s;
+    text-decoration:none;
+    border-radius: 15px;
+    align-items: center;
+}
+.focus_title{
+    top: -7px !important;
+    background: black
+
+}
+.colorized-image{
+    filter: brightness(0) invert(1);
+}
+
+.filtered_black_color{
+    filter: brightness(0)
+}
+
+#Favourite:hover{
+    background: rgba(14, 110, 255, 0.1)
+}
+#publicbutton:hover{
+        background: rgba(255, 200, 5, 0.1);
+}
+
+#ownbutton:hover{
+    background: #0effe21f
+}
+
+.active_searchbar{
+    width:420px !important;
+    visibility: visible !important;
+    height:55px !important;
+    transition:0.3s !important; 
+}
+
+
+
+
+
+@media screen and (max-width:1093px) {
+    .active_searchbar {
+        right: 18% !important;
+
+    }
+}
+@media screen and (max-width:1242px) {
+    .active_searchbar {
+        right: 17% !important;
+
+    }
+}
+@media screen and (min-width:1707px) {
+    .active_searchbar {
+        right: 13% !important;
+   
+    }
+}
+@media screen and (min-width:1821.33px) {
+    .active_searchbar {
+        right: 13% !important;
+        position: absolute !important;
+    }
+}
+
+
+
+
+@media screen and (min-width:2049px) {
+    .active_searchbar {
+        right: 12% !important;
+        position: absolute !important;
+    }
+}
+@media screen and (min-width:2732px) {
+    .active_searchbar {
+        right: 10% !important;
+        top: 1.5% !important;
+        position: absolute !important;
+    }
+}
+@media screen and (min-width:4098px) {
+    .active_searchbar {
+        right: 8.5% !important;
+        top: 1.8% !important;
+    }
+}
+@media screen and (min-width:5464px) {
+    .active_searchbar {
+        right: 7.5% !important;
+            top: 1.8% !important;
+    }
+}
+
+
+#searchbar:focus{
+    border-color:#00C28C !important
+}
+#searchbar:focus-visible{
+   border: 1px solid #00C28C !important
+}
+.focused_border{
+    border-color: #00C28C !important;
+}
+
+#continue_to_prompt_screen_2:hover{
+    background-color: #00C28C !important
+}
+
+#continue_to_prompt_screen_3:hover{
+    background-color:#00C28C !important
+}
+#continue_to_prompt_screen_8:hover {
+    background-color: #00C28C !important
+}
+#continue_to_prompt_screen_7:hover {
+    background-color: #00C28C !important
+}
+#continue_to_prompt_screen_6:hover {
+    background-color: #00C28C !important
+}
+#join_wishlist_button:hover{
+    background-color:#00C28C !important;
+    color:white !important;
+}
+
+#save_suggestion:hover{
+background-color: #00C28C !important
+}
+#prompt_stacking_div_2:hover{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: 15px;
+        background: #111e1a;
+}
+#prompt_stacking_div_3:hover{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    background: #111e1a;
+}
+#prompt_stacking_div_1:hover{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    background: #111e1a;
+
+}
+#clear_prompt_div:hover{
+background-color: #00C28C !important
+}
+#promptbtn:hover{
+    background-color: transparent !important;
+        color: #00C28C !important;
+        border-color: #00c08b !important;
+        border: 2px solid #00c08b ;
+}
+#default_mode:hover{
+    background:rgba(0, 194, 140, 0.1);
+    border-radius:15px
+}
+
+#browser_mode:hover {
+    background: rgba(0, 194, 140, 0.1);
+    border-radius: 15px
+}
+
+#plugins_mode:hover{
+    background: rgba(0, 194, 140, 0.1);
+    border-radius: 15px
+}
+.hover_category_items:hover{
+    background-color: #00C28C !important;
+    
 }

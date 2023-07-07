@@ -5,6 +5,31 @@ const extension_disabled=()=>{
   // document.querySelectorAll(gpt_mode_selector)[1].style.cssText += 'background: #d9d9e3 !important';
     
     clearInputs();
+  $('body').eq(0).css({
+    "background": "",
+     
+  });
+  $('#navbar_items').hide();
+
+  $('form').parent().css('padding-bottom','');
+  $('.scrollbar-trigger').parent().css('height','100%');
+
+ 
+  if ($('.prompt_ai_logo_2').length){
+    $('.prompt_ai_logo_2').remove();
+  }
+  if(not_loggedin===false){
+    $('#upper_side_menu_content').css('padding-top', '29.5%');
+    $('#upper_side_menu_content').append(`<div class='prompt_ai_logo_2' style="position: absolute;
+          top: 18px;
+          height:40px;
+          left: 24.5%;
+          display:flex" > 
+            <img src='${updated_prompt_savy_logo}'   />     </div>`)
+  }
+ 
+  
+  $('#extension_status_text').text('Enable Extension');
     $('#main_screen_div').hide();
     $('#language-select-wrapper').remove();
 

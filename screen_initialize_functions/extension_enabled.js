@@ -1,10 +1,37 @@
 const extension_enabled=()=>{
    
     clearInputs();
+    if(ischatActive===false){
+        $('body').eq(0).css({
+            "background": "black",
+
+        });
+    }
+   
+    if(not_loggedin===false){
+        $('form').parent().css('padding-bottom', '6%');
+    }
+  
+
+    $('#navbar_items').show();
+    $('.prompt_ai_logo_2').remove();
+    if(not_loggedin===false){
+        $('#upper_side_menu_content').css('padding-top', '');
+    }
+
+    if(not_loggedin===false){
+        $('.scrollbar-trigger').parent().css('height', '92%');;
+    }
+    
+    $('#extension_status_text').text('Disable Extension');
     // $(`${gpt_mode_selector_div} >div `).eq(0).css('background', 'black');
     $('#main_screen_div').show();
-    $('textarea').eq(0).parent()
-        .prepend(lang_wrapper);
+    if (not_loggedin===false){
+        $('textarea').eq(0).parent()
+            .prepend(lang_wrapper);
+    }
+  
+
         if(is_premium===false){
             $('#writingStyleSelect').empty();
             $('#writingStyleSelect').append(`<option value='GPT3'> ChatGPT-3.5 </option>`)

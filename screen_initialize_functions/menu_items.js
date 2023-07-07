@@ -1,7 +1,7 @@
 const menu_items=()=>{
 
-    $("#menu").after(`<div id='menu-items' style="display:flex; margin-top:7px;justify-content:space-between;align-items:center;width:100%;margin-left:20px">
-                                      <div style="
+    $("#main_screen_div").prepend(`<div id='menu-items' style="display:flex; margin-top:7px;justify-content:space-between;align-items:center;width:98%;margin-left:20px">
+                                      <div id='main_menu_items'  style="
                                       display: flex;
                                       left: 3%;
                                     
@@ -9,38 +9,47 @@ const menu_items=()=>{
                                       align-content: flex-start;
                                       align-items: center;
                                       margin-top: 20px;
-                                      width:100%;
+                                      width:95%;
                                       position: relative;
                                       ">
-                                    <div style="display: flex;width: 700px;">
+                                    <div style="display: flex;width: 700px;margin-left:2%;">
                                     <div style="    display: flex;
                                                     align-items: center;
                                                     cursor: pointer;
                                                     background: rgba(255, 200, 5, 0.1);
                                                     width: 68px;
-                                                    height: 31px;
+                                                    transition:0.3s;
+                                                    height: 40px;
                                                     padding-left: 1%;
                                                     border-radius: 10px;" id='publicbutton' > <div> <img src="${star_2}" alt="vCZC4.png" border="0" /> </div>  <div >  &nbsp <span style="color:white;margin-left:5px">   All </span> </div> </div>
                             
                             
                             
-                                    <div style="margin-left: 75px;display:flex;align-items:center" id='Favourite' > <div><img src="${saved}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Saved </span> </div> </div>
+                                    <div style="    margin-left: 45px;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    cursor: pointer;
+                                                    border-radius: 10px;
+                                                    height:40px;
+                                                    transition:0.3s;
+                                                    width: 94px;" id='Favourite' > <div style="margin-left:11%" ><img src="${saved}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Saved </span> </div> </div>
                             
                             
-                                    <div style="margin-left: 75px;display:flex;align-items:center" id="Purchase" > <div > <img src="${purchased}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Purchased </span> </div> </div>
+                                   
                             
                             
-                                    <div style="margin-left: 75px;display:flex;align-items:center" id='ownbutton' > <div><img src="${created}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Created </span> </div></div>
+                                    <div style=" width:109px;border-radius:10px; transition:0.3s; height:40px;margin-left: 45px;display:flex;align-items:center" id='ownbutton' > <div style="margin-left:8%"><img src="${created}" alt="vCZC4.png" border="0" /> </div>  <div>  &nbsp <span style="color:white;margin-left:5px">   Created </span> </div></div>
                                     </div>
                                     <div style="    position: relative;
                                                     margin-top:1%;
-                                                    right: 5%;">
-                                        <button id='promptbtn' class='create_new_prompt_btn' style="background-color: #00c08b;height: 54px;width: 153px;border-radius: 20px;padding-left: 10px;color: white;padding: 5px;">
+                                                    margin-right:3%;
+                                                    ">
+                                        <button id='promptbtn' class='create_new_prompt_btn' style=" font-size:14px;font-weight:500; background-color: #00c08b;height: 46px;width: 165px;border-radius: 20px;padding-left: 10px;color: white;padding: 5px;">
                                             <div id='prompt' style="padding-right:20px">
                                                 <svg id='mysvg' stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="float: left;
             margin-left: 10px;
             margin-top: 4px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                New prompt
+                                            Create Prompt
                                             </div>
                                         </button>
                                     </div>
@@ -78,8 +87,8 @@ const menu_items=()=>{
                                       <div style="display:flex; gap:15px;margin-left:0px">
                                           <div style="height:55px">
                                               <select id='Category_filter' style="border-color:#28a47a;
-                                                                          width: 250px;
-                                                                          height: 100%;
+                                                                          width: 200px;
+                                                                          height:40px;
                                                                           background-color:black;
                                                                           color:white;
                                                                           border-radius: 6%;" >
@@ -94,8 +103,8 @@ const menu_items=()=>{
                                   
                                           <div style="height:55px">
                                               <select id='Subcategories_filter' style="border-color: #28a47a;
-                                                                                  width: 250px;
-                                                                                  height: 100%;
+                                                                                  width: 200px;
+                                                                                  height: 40px;
                                                                                   background-color:black;
                                                                                   color:white;
                                                                                   border-radius:6%;"   >
@@ -105,19 +114,7 @@ const menu_items=()=>{
                                           </div>
                                           <div>
                                           </div>
-                                          <div style="height:55px">
-                                              <select id='Model' style="          border-color: #28a47a;
-                                                                                  height: 100%;
-                                                                                  background-color:black;
-                                                                                  color:white;
-                                                                                  border-radius: 15%;"   >
-                                  
-                                                  
-                                                  <option value="All_filter_button"> All </option>
-                                                  <option value="Free_filter_button"> Free </option>
-                                                  <option value="Paid_filter_button" > Paid  </option>
-                                              </select>
-                                          </div>
+                                         
                                          
                                       </div>
                                   </div> `
@@ -206,8 +203,8 @@ const menu_items=()=>{
     // }
 
 
-    var main_div = `<div id='main_div' class='row container' style="width: 100%;
-                                                    margin-top: 15px;
+    var main_div = `<div id='main_div' class='row container' style="width: 97%;
+                                                    margin-top: 29px;
                                                     margin-left: 35px;" ></div>`;
 
     // if(!$("h1").parent().length)
@@ -218,7 +215,7 @@ const menu_items=()=>{
         // }
         // $(main_screen_selector).eq(0).css('background', 'black');
       
-        $('#top_bar').after(main_div);
+        $('#menu-tabs').after(main_div);
         if(prompt_to_load.length){
             $('#ownbutton').click();
             // $(`#${prompt_to_load[0]._id}`).click();

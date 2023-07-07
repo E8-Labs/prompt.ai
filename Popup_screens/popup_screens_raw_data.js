@@ -34,28 +34,66 @@ var popUp = `<div id="openPopUp" style="  height: 500px;
 
             </div>
             <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-            <div class="line-1 step_bar_single_completed" style="width:5%" ></div>
+           <div class="line-1 step_bar_single_completed"></div>
+            <div class="line-2 step_bar_single_uncompleted"></div>
+            <div class="line-3 step_bar_single_uncompleted"></div>
+            <div class="line-4 step_bar_single_uncompleted"></div>
+            <div class="line-5 step_bar_single_uncompleted"></div>
+            <div class="line-6 step_bar_single_uncompleted" ></div>
+            <div class="line-7 step_bar_single_uncompleted" ></div>
+            </div>
             
             </div>
             <div id="pubpvt_tab" style="margin-left: 29%;padding-top: 20px;">
             <button id='public_btn' style="background: #474646;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Public</button>
             <button id='private_btn' style="background: black;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;">Private</button>
             </div>
-            <div id="new_prompt_title_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-            <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Title</span>
-            <input id='new_prompt_title'  type='text' maxlength='150'   style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" placeholder='Create Powerful Youtube Script in...'  />
+            <div  id="new_prompt_title_div" style="display: grid;border: 1px solid #FFFFFF;margin-top: 30px;border-radius: 15px;">
+            <span id='label_for_title' style="font-style: normal;
+                              font-weight: 500;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Title</span>
+            <input id='new_prompt_title'  type='text' maxlength='150'   style="  font-size:14px;font-weight:500; background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 40px;box-shadow: none;" placeholder='Create Powerful Youtube Script in...'  />
             </div>
             <div style="display:flex;justify-content:flex-end"> <p id='max_title_char_length' style="color: white;
             font-size: 12px;
             margin-right: 20px;"> ${max_char_title}  characters  </p>    </div>
-            <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-            <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Description</span>
-            <textarea  maxlength="250" id='new_prompt_teaser' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 142px;border: none;font-size: 12px;box-shadow: none;" placeholder='Use this space to create an enticing description that draws users in understanding what your prompt does' ></textarea>
+            <div  id='new_prompt_teaser_div'  style="border: 1px solid #FFFFFF;margin-top: 30px;border-radius: 15px;">
+            <span id='label_for_description' style="font-style: normal;
+                              font-weight: 500;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Description</span>
+            <textarea  maxlength="250" id='new_prompt_teaser' style="color:white;font-weight:500;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 14px;width: 98%;height: 142px;border: none;box-shadow: none;" placeholder='Use this space to create an enticing description that draws users in understanding what your prompt does' ></textarea>
             </div>
             <div style="display:flex;justify-content:flex-end"> <p id='max_char_teaser_length' style="color: white;
             font-size: 12px;
             margin-right: 20px;"> ${max_char_teaser} characters </p>  </div>
-            <button id='continue_to_prompt_screen_2' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
+            <button id='continue_to_prompt_screen_2' style="background: transparent;
+                        border-radius: 13px;
+                        color: #fff;
+                        border: 2px solid #00C28C;
+                        padding: 10px 15px;
+                        transition: .3s;
+                        font-weight: 500;
+                        font-size: 15px;
+                        line-height: 18px;
+                        display: inline-flex;
+                        position:absolute;
+                        bottom:20px;
+                        left:37%;
+                        align-items: center">Continue</button>
 
             </div>
             </div>`
@@ -99,21 +137,36 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
               
 
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed" style="width:40px" ></div>
+              <div class="line-1 step_bar_single_completed"></div>
+              <div class="line-2 step_bar_single_completed"></div>
+              <div class="line-3 step_bar_single_uncompleted"></div>
+              <div class="line-4 step_bar_single_uncompleted"></div>
+              <div class="line-5 step_bar_single_uncompleted"></div>
+              <div class="line-6 step_bar_single_uncompleted" ></div>
+              <div class="line-7 step_bar_single_uncompleted" ></div>
               
               </div>
 
               
-             <div style="border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-             <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Template</span>
-            <textarea placeholder='This is where the magic happens, Ensure your variables are in [Brackets] Eg:[Prompt],[Topic],[Subject] You can have more than one variable Eg: [Language], [Tone],[Age],[Height] Be detailed and specific; the more context you provide the better the result. For more help, click the link below.' id='new_prompt_template' style="color:white;margin-left: 8px;background-color: transparent;border-radius:5px;font-size: 12px;width: 98%;height: 175px;border: none;font-size: 12px;box-shadow: none;"></textarea>
+             <div id='new_prompt_template_div' style="border: 1px solid #6E6E6E;margin-top: 30px;border-radius: 15px;">
+             <span id='label_for_template' style="font-style: normal;
+                              font-weight: 500;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Template</span>
+            <textarea placeholder='🪄 This is where the magic happens' id='new_prompt_template' style=" font-weight:500;font-size:14px; color:white;margin-left: 8px;background-color: transparent;border-radius:5px;width: 98%;height: 175px;border: none;box-shadow: none;"></textarea>
            
             
               </div> 
 
               <div style="display:flex;gap:10px;
-                          margin-top: 10px;
-                          margin-left: 40px;">
+                          margin-top: 41px;
+                          margin-left: 11px;">
               <div> <svg style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -123,7 +176,20 @@ var popUp2 = ` <div id="openPopUp" style="  height: 500px;
 
               
               
-              <button id='continue_to_prompt_screen_3' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_3' style="background: transparent;
+                                                              border-radius: 13px;
+                                                              color: #fff;
+                                                              border: 2px solid #00C28C;
+                                                              padding: 10px 15px;
+                                                              transition: .3s;
+                                                              font-weight: 500;
+                                                              font-size: 15px;
+                                                              line-height: 18px;
+                                                              display: inline-flex;
+                                                              position: absolute;
+                                                              bottom: 20px;
+                                                              left: 37%;
+                                                              align-items: center;">Continue</button>
 
               </div>
               </div>
@@ -172,37 +238,72 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed" style="width:25%" ></div>
+                <div class="line-1 step_bar_single_completed"></div>
+              <div class="line-2 step_bar_single_completed"></div>
+              <div class="line-3 step_bar_single_completed"></div>
+              <div class="line-4 step_bar_single_uncompleted"></div>
+              <div class="line-5 step_bar_single_uncompleted"></div>
+              <div class="line-6 step_bar_single_uncompleted" ></div>
+              <div class="line-7 step_bar_single_uncompleted" ></div>
+              </div>
             
               </div>
 
-              <div id="new_prompt_Hint_div" style="display: grid;border: 2px solid #28a47a;margin-top: 30px;border-radius: 15px;">
-              <div> <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Hint</span> </div>
-              <div> <input id='new_prompt_Hint' type='text' placeholder='Ex: Makeup tutorial, Amazon FBA, etc'  style=" width:100%; background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 30px;box-shadow: none;" /> </div>
+              <div id="new_prompt_Hint_div" style="display: grid;border: 1px solid #FFFFFF;margin-top: 30px;border-radius: 15px;">
+               <span id='label_for_hint' style="font-style: normal;
+                              font-weight: 500;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Hint</span> 
+              <div> <input id='new_prompt_Hint' type='text' placeholder='Ex: Makeup tutorial, Amazon FBA, etc'  style=" width:100%; background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 40px;box-shadow: none;" /> </div>
               </div>
-              <div style="height: 70px;
-              border: 2px solid #28a47a;
+              <div id='new_prompt_category_div' style="height: 70px;
+              border: 1px solid #FFFFFF;
               margin-top: 30px;
               border-radius: 15px;">
-              <div style="height:27px">  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Category</span> </div>
-              <div> <select style="width: 360px;
+               <span id='label_for_category' style="font-style: normal;
+                              font-weight: 500;
+                              height:27px;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Category</span>
+              <div> <select  style="width: 360px;
                         border-radius: 15px;
                         background-color: black;
                         border: none;
                         font-size: 13px;
                         box-shadow:none;
-                        margin-top: -9px;" name="select_topic" id="select_topic">
+                        margin-top: -9px;" name="select_topic" id="select_topic"  >
               <option style="border:none" value='none'>Select </option>
               </select>
               </div>
 
 
 
-              <div style="height: 70px;
-                border: 2px solid #28a47a;
+              <div id='new_prompt_subtopic_div' style="height: 70px;
+                border: 1px solid #FFFFFF;
                 margin-top: 30px;
                 border-radius: 15px;">
-               <div>  <span style="font-size: 10px;margin-left: 10px;color: #28a47a;padding-top: 4px;">Topic</span> </div>
+                 <span id='label_for_subtopic' style="font-style: normal;
+                              font-weight: 500;
+                              font-size: 11px;
+                              line-height: 12px;
+                              color: #00C28C;
+                              position: relative;
+                              left: 12px;
+                              top: 7px;
+                              width:22px;
+                              transition: .3s;">Topic</span> 
               <div> <select style="width: 100%;
                             box-shadow:none;
                             border-radius: 15px;
@@ -227,7 +328,20 @@ var popUp3 = `<div id="openPopUp" style="  position: fixed;
 
              
 
-              <button id='continue_to_prompt_screen_6' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_6' style="background: transparent;
+                                                              border-radius: 13px;
+                                                              color: #fff;
+                                                              border: 2px solid #00C28C;
+                                                              padding: 10px 15px;
+                                                              transition: .3s;
+                                                              font-weight: 500;
+                                                              font-size: 15px;
+                                                              line-height: 18px;
+                                                              display: inline-flex;
+                                                              position: absolute;
+                                                              bottom: 20px;
+                                                              left: 37%;
+                                                              align-items: center;">Continue</button>
 
               </div>
               </div>
@@ -267,13 +381,13 @@ var popUp4 = `<div id="openPopUp" style="  height: 500px;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed"></div>
+                <div class="line-1 step_bar_single_completed"></div>
               <div class="line-2 step_bar_single_completed"></div>
               <div class="line-3 step_bar_single_completed"></div>
               <div class="line-4 step_bar_single_completed"></div>
               <div class="line-5 step_bar_single_uncompleted"></div>
               <div class="line-6 step_bar_single_uncompleted" ></div>
-              <div class="line-7 step_bar_single_uncompleted" ></div>
+              <div class="line-7 step_bar_single_uncompleted" ></div>  
               </div>
 
               <div style="display:flex;justify-content:center">
@@ -358,7 +472,7 @@ var popUp5 = `<div id="openPopUp" style="  height: 500px;
 
                 </div>
                 <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-                <div class="line-1 step_bar_single_completed"></div>
+              <div class="line-1 step_bar_single_completed"></div>
                 <div class="line-2 step_bar_single_completed"></div>
                 <div class="line-3 step_bar_single_completed"></div>
                 <div class="line-4 step_bar_single_completed"></div>
@@ -456,7 +570,14 @@ var popUp6 = `<div id="openPopUp" style="  height: 500px;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed" style="width:40%"></div>
+             <div class="line-1 step_bar_single_completed"></div>
+              <div class="line-2 step_bar_single_completed"></div>
+              <div class="line-3 step_bar_single_completed"></div>
+              <div class="line-4 step_bar_single_completed"></div>
+              <div class="line-5 step_bar_single_completed"></div>
+              <div class="line-6 step_bar_single_completed" ></div>
+              <div class="line-7 step_bar_single_uncompleted" ></div>
+              </div>
               
               </div>
 
@@ -465,92 +586,80 @@ var popUp6 = `<div id="openPopUp" style="  height: 500px;
               </div>
 
               <div style="display:flex;justify-content:center">
-              <b style="color:white;font-size:11px;margin-left: -25px;"> (Optional)  </b>
+              <b style="font-weight:500; color:white;font-size:14px;margin-left: -25px;"> Use your own personal data or online   </b>
+              </div>
+               <div style="display:flex;justify-content:center">
+              <b style=" font-weight:500; color:white;font-size:13px;margin-left: -25px;"> data to enhance this prompt.   </b>
               </div>
 
-              <div id="new_prompt_CSV_div" style="display: flex;
-                                                  margin-top: 10px;
-                                                  align-items: center;
-                                                  ">
-              <div id="file_upload_button" style="height: 50px;margin-top:10px;
-                border-radius: 50%;
-                background-color: #28a47a;
-                width: 54px;
-                margin-left: 60px;
-                display: flex;
-                justify-content: center;
-                align-items: center;">
-                <div  style="width: 100%;
-                              height: 100%;
-                              display: flex;
-                              align-items: center;
-                              justify-content:center" >
-              <svg  style="height:100%;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
-              <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-              <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
-              </svg>
+            
+              
+              <div style="margin-left:42px;margin-top:32px" >
+              <h5 style="color: #00C28C;
+                         font-weight: 500;"> Join the waitlist </h5>
               </div>
-                 
+
+              <div style="margin-left:34px;margin-top:5px;display:flex;align-items:center" >
+              <div id='waiting_list_email_address_div' style="background: #050A08;
+                          border: 1px solid #FFFFFF;
+                          border-radius: 14px;
+                          
+                          font-weight: 500;
+                          font-size: 14px;
+                          line-height: 17px;
+                          color: #FFFFFF;
+                          height: 45px;
+                          width: 204px;
+                          transition: .3s;">
+              <input id='waiting_list_email_address_input' placeholder='Email Address'  type='text' style="background: #050A08;
+              border: none;
+              box-shadow: none;
+              width: 100%;
+              border-radius:20px;"  />
+              </div>
+
+              <div style="margin-left:10px">
+              <button id='join_wishlist_button' style="background: rgba(0, 194, 140, 0.1);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #00C28C;
+    border: none;
+    width: 120px;
+    height: 47px;
+    margin-left: 10px;
+    transition: .3s;" >Join Waitlist</button>
+              
+              </div>
+              </div>
               
             
-              </div>
              
-              <div style="display:flex;justify-content:center">
-              <input style="width: 100%;
-                          margin-top: 10px;
-                          margin-left: 20px;;" id='file_select_input' type='file' />
-              <span style="
-              color: white;
-              position: absolute;
-              top: 40%;
-              left: 43%;
-              max-width: 150px;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              overflow: hidden;"
-               id='file_text_name'>   </span>
-              </div>
-             
-            </div>
+
 
              
             
 
-              <div class='container' style="display:flex;justify-content:center">
-              <hr style="color: white;
-                        width: 75%;
-                        border-color: white;
-                        margin-top: 15px;"> 
-              <hr>
-
-              </div>
-
-            
-            <input id='new_prompt_file_url' placeholder='Enter URL' type='text' style="    background: transparent;
-            margin-top: 50px;
-            border: 0px;
-            border-color: black;
-            color: white;
-            outline: none;
-            height: 35px;
-            box-shadow: none;
-            border: 2px solid #28a47a;
-            border-radius: 15px;
-            margin-left: 80px;" />
            
-              
-             <div style="display:flex;gap:10px;
-                          margin-top: 10px;
-                          margin-left: 65px;">
-              <div> <svg style="color:#28a47a" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                    </svg> </div>
-              <div> <h4 style="color:white;text-decoration:underline"> Learn how to enrich with data </h4> </div>
-              </div>
+          
 
 
-              <button id='continue_to_prompt_screen_7' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 35%;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_7' style="background: transparent;
+                          border-radius: 13px;
+                          color: #fff;
+                          border: 2px solid #00C28C;
+                          padding: 10px 15px;
+                          transition: .3s;
+                          font-weight: 500;
+                          font-size: 15px;
+                          line-height: 18px;
+                          display: inline-flex;
+                          position: absolute;
+                          bottom: 20px;
+                          left: 37%;
+                          align-items: center;">Continue</button>
 
               </div>
               </div>`;
@@ -592,7 +701,14 @@ var popUp7 = `<div id="openPopUp" style="  height: 500px;
 
               </div>
               <div id="step_bar" style="margin-left: 27%;margin-top: 10px;">
-              <div class="line-1 step_bar_single_completed" style="width:52%" ></div>
+              <div class="line-1 step_bar_single_completed"></div>
+              <div class="line-2 step_bar_single_completed"></div>
+              <div class="line-3 step_bar_single_completed"></div>
+              <div class="line-4 step_bar_single_completed"></div>
+              <div class="line-5 step_bar_single_completed"></div>
+              <div class="line-6 step_bar_single_completed" ></div>
+              <div class="line-7 step_bar_single_completed" ></div>
+              <div class="line-8 step_bar_single_completed" style="float:none"></div>
             
               </div>
 
@@ -649,7 +765,20 @@ var popUp7 = `<div id="openPopUp" style="  height: 500px;
               </div>
 
 
-              <button id='continue_to_prompt_screen_8' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-left: 35%;position:absolute;bottom:20px;position:absolute;bottom:20px;">Continue</button>
+              <button id='continue_to_prompt_screen_8' style="background: transparent;
+                                                              border-radius: 13px;
+                                                              color: #fff;
+                                                              border: 2px solid #00C28C;
+                                                              padding: 10px 15px;
+                                                              transition: .3s;
+                                                              font-weight: 500;
+                                                              font-size: 15px;
+                                                              line-height: 18px;
+                                                              display: inline-flex;
+                                                              position: absolute;
+                                                              bottom: 20px;
+                                                              left: 37%;
+                                                              align-items: center;">Continue</button>
 
               </div>
               </div>`;
@@ -768,30 +897,47 @@ var suggestionPopUp = `<div id="openPopUp" style="  position: fixed;
               
             <div style="display:flex;align-items:center;margin-left:21px">
            
-              <div id="new_prompt_suggestion_div" style="display: flex;
+              <div style="display: flex;
             width: 78%;
-            border: 2px solid #565a59;
+           
             margin-top: 30px;
             border-radius: 15px;
             margin-left: 20px;
               ">
               
-              <div style="display:flex;"> <input placeholder='Category Suggestion' id='new_prompt_topic_suggestion' type='text' style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 35px;box-shadow: none;width:100%" /> 
+              <div id='new_prompt_category_suggestion_div' style="color: white;
+                          height: 46px;
+                          font-weight: 500;
+                          font-size: 14px;
+                          font-style: normal;
+                          border: 1px solid white;
+                          width: 100%;
+                          border-radius: 20px;"> <input placeholder='Category Suggestion' id='new_prompt_topic_suggestion' type='text' style="border: none;
+                                                                          box-shadow: none;
+                                                                          outline: none;
+                                                                          border-radius: 0px;
+                                                                          width: 85%;
+                                                                          height: 92%;
+                                                                          margin-left: 6%;
+                                                                          background:black;" /> 
               
               </div>
               </div>
               </div>
 
 
-               <div id="new_prompt_suggestion_div" style="display: flex;
+               <div id="new_prompt_subcategory_suggestion_div" style="display: flex;
             width: 75%;
-            border: 2px solid #565a59;
+            border: 1px solid #FFFFFF;
             margin-top: 30px;
+            height:52px;
             border-radius: 15px;
             margin-left: 40px;
               ">
               
-              <div style="display:flex;"> <input placeholder='Subcategory Suggestion' id='new_prompt_subtopic_suggestion' type='text' style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 35px;box-shadow: none;width:100%" /> 
+              <div style="display: flex;
+                          margin-left: 7%;
+                          align-items: center;"> <input placeholder='Subcategory Suggestion' id='new_prompt_subtopic_suggestion' type='text' style="background: transparent;border: 0px;border-color: black;color: white;outline: none;height: 35px;box-shadow: none;width:100%" /> 
               
               </div>
               </div>
@@ -802,7 +948,20 @@ var suggestionPopUp = `<div id="openPopUp" style="  position: fixed;
               </div>
     
 
-              <button id='save_suggestion' style="background: #28a47a;border-radius: 9px;color: white;border: 0px;padding: 5px 15px;margin-top: 15px;margin-left: 90px;position:absolute;bottom:20px;">Submit Suggestion</button>
+              <button id='save_suggestion' style="background: transparent;
+                        border-radius: 13px;
+                        color: #fff;
+                        border: 2px solid #00C28C;
+                        padding: 10px 15px;
+                        transition: .3s;
+                        font-weight: 500;
+                        font-size: 15px;
+                        line-height: 18px;
+                        display: inline-flex;
+                        position:absolute;
+                        bottom:20px;
+                        left:30%;
+                        align-items: center">Submit Suggestion</button>
 
               </div>
               </div>

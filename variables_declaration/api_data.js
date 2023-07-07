@@ -5,3 +5,5 @@ var global_api_response;
 var all_prompts = [];
 var user_favourite_prompts;
 var extra_prompts = [];
+
+var child_prompts_information=[];

@@ -1,7 +1,7 @@
 const fetchPrompts = async () => {
 
     $("#loading_gif_2").show();
-    chrome.runtime.sendMessage({ type: "fetch_prompts", id: user_email, page }, function (response) {
+    chrome.runtime.sendMessage({ type: "fetch_prompts", id: userId, page }, function (response) {
         console.log(response);
         global_api_response = response.data.public_prompts;
         user_prompts = response.data.user_prompts;
