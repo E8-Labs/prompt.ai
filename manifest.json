@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "name": "PromptSavvy",
+  "description": "Share and use the most powerful ChatGPT Prompts",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "PromptSavvy"
+  }
+}
