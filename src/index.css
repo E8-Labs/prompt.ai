@@ -28,9 +28,19 @@ a:hover {
   color: #535bf2;
 }
 
-#root {
+#root,
+#savvy-root {
   height: 100%;
   width: 100%;
+}
+
+#savvy-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  z-index: 1000;
 }
 
 body {
