@@ -1,4 +1,6 @@
-import { Dashboard } from "./views/dashboard"
+import { Dashboard } from "./views/Dashboard"
+
+import "./index.css"
 
 function App() {
   return <Dashboard />

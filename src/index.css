@@ -19,6 +19,29 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+  @apply font-rubik;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+#__next {
+  width: 100%;
+}
+
+.logo {
+  margin: 40px 0 20px;
+  color: #ffffff;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -30,16 +53,16 @@ a:hover {
 
 #root,
 #savvy-root {
-  height: 100%;
-  width: 100%;
+  @apply font-rubik w-full h-full;
 }
 
 #savvy-root {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
   min-height: 100vh;
-  min-width: 100vw;
   z-index: 1000;
 }
 
@@ -73,6 +96,12 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media only screen and (min-width: 768px) {
+  #savvy-root {
+    width: calc(100% - 260px);
+  }
 }
 
 @media (prefers-color-scheme: light) {
