@@ -22,7 +22,7 @@ Select the `dist` folder from this project and upload
 
 ## Testing
 
-TBD - We will leverage React Testing Libary
+TBD - If we include testing, we will leverage [React Testing Libary](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## Linting
 

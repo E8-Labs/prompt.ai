@@ -1,9 +1,9 @@
-import { Dashboard } from "./views/Dashboard"
+import { Dashboard } from './views/Dashboard';
 
-import "./index.css"
+import './index.css';
 
 function App() {
-  return <Dashboard />
+  return <Dashboard />;
 }
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
-chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
+chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   console.log("in Background")
-  if (request.type == "increasing_views") {
+  if (request.type === "increasing_views") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -15,20 +15,18 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "upvoting") {
+  if (request.type === "upvoting") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -47,21 +45,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "downvoting") {
+  if (request.type === "downvoting") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -74,21 +70,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "flag") {
+  if (request.type === "flag") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -103,21 +97,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "deleting_favourite_prompt") {
+  if (request.type === "deleting_favourite_prompt") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -136,20 +128,18 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "fetching_topics") {
+  if (request.type === "fetching_topics") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -162,21 +152,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "sort") {
+  if (request.type === "sort") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -188,22 +176,22 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "fetch_prompts") {
+  if (request.type === "fetch_prompts") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -217,22 +205,22 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "checking_user") {
+  if (request.type === "checking_user") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -246,23 +234,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "inserting_user") {
+  if (request.type === "inserting_user") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -281,23 +269,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "fetching_user_prompts") {
+  if (request.type === "fetching_user_prompts") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -314,23 +302,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "changing_pID") {
+  if (request.type === "changing_pID") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -347,23 +335,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp, message: "successfully done" })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "creating_prompt") {
+  if (request.type === "creating_prompt") {
     console.log(request)
 
     const req = new Request(
@@ -398,23 +386,21 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         console.log(resp)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "checking_favourite_prompt_existence") {
+  if (request.type === "checking_favourite_prompt_existence") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -433,21 +419,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "adding_favourite_prompt") {
+  if (request.type === "adding_favourite_prompt") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -466,21 +450,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "search_prompts") {
+  if (request.type === "search_prompts") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -498,23 +480,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "suggesting_category_and_subcategory") {
+  if (request.type === "suggesting_category_and_subcategory") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -532,23 +514,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "filter_prompts") {
+  if (request.type === "filter_prompts") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -569,23 +551,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "file_handling") {
+  if (request.type === "file_handling") {
     // const req = new Request(
     //   "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
     //   {
@@ -616,23 +598,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req12)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log("Response with Success. Please check status...")
         console.log(obj)
         sendResponse({ status: 200, data: obj })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "inserting_user_prompt_history") {
+  if (request.type === "inserting_user_prompt_history") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -651,23 +633,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "fetching_user_prompt_history") {
+  if (request.type === "fetching_user_prompt_history") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -684,23 +666,23 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
       }
     )
     fetch(req)
-      .then(function (response) {
+      .then((response) =>
         // debugger;
-        return response.json()
-      })
-      .then(function (jsonData) {
+        response.json()
+      )
+      .then((jsonData) => {
         const obj = jsonData
         console.log(obj)
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "editing_prompt") {
+  if (request.type === "editing_prompt") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -728,20 +710,18 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
-  if (request.type == "delete_prompt") {
+  if (request.type === "delete_prompt") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -756,21 +736,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "fetching_selectors") {
+  if (request.type === "fetching_selectors") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -783,21 +761,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "logging_out") {
+  if (request.type === "logging_out") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -810,21 +786,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "logging_in") {
+  if (request.type === "logging_in") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -839,21 +813,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "fetching_template_content") {
+  if (request.type === "fetching_template_content") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -868,21 +840,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "checking_username") {
+  if (request.type === "checking_username") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -900,21 +870,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "inserting_username") {
+  if (request.type === "inserting_username") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -938,21 +906,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "inserting_a_subscriber") {
+  if (request.type === "inserting_a_subscriber") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -971,21 +937,19 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
   }
 
-  if (request.type == "join_waitlist") {
+  if (request.type === "join_waitlist") {
     const req = new Request(
       "https://hypgs0jnvl.execute-api.us-east-1.amazonaws.com/dev/ai/",
       {
@@ -1000,15 +964,13 @@ chrome.runtime.onMessage.addListener(function (request, _sender, sendResponse) {
     )
 
     fetch(req)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (jsonData) {
+      .then((response) => response.json())
+      .then((jsonData) => {
         const obj = jsonData
         const resp = JSON.parse(obj.body)
         sendResponse({ status: 200, data: resp })
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.log("Opps, Something went wrong!", err)
         sendResponse({ status: 400 })
       })
